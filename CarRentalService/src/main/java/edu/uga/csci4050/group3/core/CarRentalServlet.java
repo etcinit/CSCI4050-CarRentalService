@@ -1,23 +1,24 @@
-package edu.uga.csci4050;
+package edu.uga.csci4050.group3.core;
 
 import java.io.IOException;
-import java.io.Writer;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.uga.csci4050.group3.template.LayoutRoot;
+
 /**
- * Servlet implementation class RentalServiceServlet
+ * Servlet implementation class CarRentalServlet
  */
-public class RentalServiceServlet extends HttpServlet {
+public class CarRentalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RentalServiceServlet() {
+    public CarRentalServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,9 +28,9 @@ public class RentalServiceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter pw = response.getWriter();
+		LayoutRoot lr = new LayoutRoot(getServletContext());
+		lr.render(response.getWriter());
 		
-		pw.println("<h1>Hello World</h1>");
 	}
 
 	/**
