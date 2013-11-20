@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 
 /**
@@ -31,6 +32,7 @@ public class CarRentalServlet extends HttpServlet {
 		LayoutRoot lr = new LayoutRoot(getServletContext());
 		lr.render(response.getWriter());
 		
+		DatabaseAbstraction.setupDatabase();
 	}
 
 	/**
