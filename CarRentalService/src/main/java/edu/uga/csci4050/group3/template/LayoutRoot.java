@@ -22,6 +22,7 @@ public class LayoutRoot extends Template{
 		DefaultMustacheFactory dmf = new DefaultMustacheFactory();
 		Mustache mustache = dmf.compile(locateTemplate("LayoutRoot.mustache"),"LayoutRoot.mustache");
 		mustache.execute(pw, this);
+		// Test comment
 		pw.flush();
 	}
 
