@@ -1,10 +1,12 @@
 package edu.uga.csci4050.group3.template;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 public abstract class Template {
 	
@@ -14,7 +16,17 @@ public abstract class Template {
 		this.context = context;
 	}
 	
+	abstract public String render();
 	abstract public void render(PrintWriter pw);
+	
+	public void render(HttpServletResponse response){
+		try {
+			render(response.getWriter());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	protected InputStreamReader locateTemplate(String name){
 		return new InputStreamReader(this.context.getResourceAsStream("/WEB-INF/templates/" + name));

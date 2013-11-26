@@ -14,7 +14,33 @@
 
   <servlet-mapping>
   	<servlet-name>CarRentalServlet</servlet-name>
+  	
   	<url-pattern>/CarRentalServlet</url-pattern>
+  	<url-pattern>/index.jsp</url-pattern>
+  	<url-pattern>/home</url-pattern>
+  	
+  	<url-pattern>/login</url-pattern>
+  	<url-pattern>/logout</url-pattern>
+  	
+  	<url-pattern>/vehicle/*</url-pattern>
+  	<url-pattern>/vehicle/create</url-pattern>
+  	<url-pattern>/vehicle/delete/*</url-pattern>
+  	<url-pattern>/vehicle/update/*</url-pattern>
+  	
+  	<url-pattern>/vehicletype</url-pattern>
+  	<url-pattern>/vehicletype/*</url-pattern>
+  	<url-pattern>/vehicletype/create</url-pattern>
+  	<url-pattern>/vehicletype/delete/*</url-pattern>
+  	<url-pattern>/vehicletype/update/*</url-pattern>
+  	
+  	<url-pattern>/locations</url-pattern>
+  	<url-pattern>/location/*</url-pattern>
+  	<url-pattern>/location/create</url-pattern>
+  	<url-pattern>/location/delete/*</url-pattern>
+  	<url-pattern>/location/update/*</url-pattern>
+  	
+  	<url-pattern>/database/setup</url-pattern>
+  	<url-pattern>/database/destroy</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -1,5 +1,6 @@
 package edu.uga.csci4050.group3.db;
 
+import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,6 +11,7 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import edu.uga.csci4050.group3.core.Vehicle;
 import static org.jooq.impl.DSL.*;
 
 public class DatabaseAbstraction {
@@ -47,6 +49,22 @@ public class DatabaseAbstraction {
 		return "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE;
 	}
 	
+	public static Vehicle getVehicle(String UID) throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<Vehicle> result = create.select().from(tableByName("VEHICLE")).where(fieldByName("uid").equal(UID)).fetch().into(Vehicle.class);
+		if(result.size() > 0){
+			return result.get(0);
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static void putVehicle(Vehicle vehicle){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		Record vehicleRec = create.newRecord(edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle.VEHICLE,vehicle);
+		create.insertInto(edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle.VEHICLE).set(vehicleRec).execute();
+	}
+	
 	public static void setupDatabase(){
 		Connection conn = getConnection();
 		
@@ -54,7 +72,7 @@ public class DatabaseAbstraction {
 		DSLContext create = DSL.using(conn, SQLDialect.MYSQL);
 		
 		create.execute("CREATE TABLE IF NOT EXISTS USER " +
-						"(id INTEGER not NULL, " +
+						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
 						"username VARCHAR(255), " +
 						"password VARCHAR(255), " +
@@ -72,7 +90,7 @@ public class DatabaseAbstraction {
 						"PRIMARY KEY( id ))");
 		
 		create.execute("CREATE TABLE IF NOT EXISTS PAYMENT_TRANSACTION " +
-						"(id INTEGER not NULL, " +
+						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
 						"date SMALLINT, " +
 						"method VARCHAR(255), " +
@@ -82,7 +100,7 @@ public class DatabaseAbstraction {
 						"PRIMARY KEY( id ))");
 
 		create.execute("CREATE TABLE IF NOT EXISTS RENTAL_TRANSACTION " +
-						"(id INTEGER not NULL, " +
+						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
 						"start_date SMALLINT, " +
 						"end_date SMALLINT, " +
@@ -91,19 +109,20 @@ public class DatabaseAbstraction {
 						"PRIMARY KEY( id ))");
 		
 		create.execute("CREATE TABLE IF NOT EXISTS VEHICLE " +
-						"(id INTEGER not NULL, " +
+						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
 						"type VARCHAR(255), " +
 						"make VARCHAR(255), " +
 						"model VARCHAR(255), " +
 						"year SMALLINT, " +
+						"mileage SMALLINT, " +
 						"tag VARCHAR(255), " +
-						"lastservice VARCHAR(255), " +
+						"lastservice SMALLINT, " +
 						"location VARCHAR(255), " +
 						"PRIMARY KEY( id ))");
 		
 		create.execute("CREATE TABLE IF NOT EXISTS VEHICLE_TYPE " +
-						"(id INTEGER not NULL, " +
+						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
 						"name VARCHAR(255), " +
 						"hourly_rate FLOAT, " +
@@ -111,7 +130,7 @@ public class DatabaseAbstraction {
 						"PRIMARY KEY( id ))");
 		
 		create.execute("CREATE TABLE IF NOT EXISTS RENTAL_LOCATION " +
-						"(id INTEGER not NULL, " +
+						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
 						"name VARCHAR(255), " +
 						"street_address VARCHAR(255), " +
@@ -125,5 +144,15 @@ public class DatabaseAbstraction {
 		catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	public static void destroyDatabase(){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		create.execute("DROP TABLE USER");
+		create.execute("DROP TABLE PAYMENT_TRANSACTION");
+		create.execute("DROP TABLE RENTAL_TRANSACTION");
+		create.execute("DROP TABLE VEHICLE");
+		create.execute("DROP TABLE VEHICLE_TYPE");
+		create.execute("DROP TABLE RENTAL_LOCATION");
 	}
 }
