@@ -42,26 +42,29 @@ public class CarRentalServlet extends HttpServlet {
 	}
 	
 	private void doRequest(HttpServletRequest request, HttpServletResponse response, RequestType type){
-		// TODO Auto-generated method stub
-		LayoutRoot lr = new LayoutRoot(getServletContext());
+		// Get servlet context for the boundary classes
 		ServletContext context = getServletContext();
 		
+		// This where routing happens. An instance of the corresponding boundary class is created
+		// depending on the URL
 		if(uriMatches(request, "/login")){
 			new LoginUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/") || uriMatches(request, "/home")){
 			new HomeUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicle/create")){
 			new VehicleCreateUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/vehicles")){
+			new VehicleListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/database/setup")){
 			DatabaseAbstraction.setupDatabase();
 		}else if(uriMatches(request, "/database/destroy")){
 			DatabaseAbstraction.destroyDatabase();
 		}else{
+			// Basic page for debugging URLs
+			LayoutRoot lr = new LayoutRoot(getServletContext());
 			lr.setContent("Page:" + request.getRequestURI());
 			lr.render(response);
 		}
-		
-		//DatabaseAbstraction.setupDatabase();
 	}
 	
 	private boolean uriMatches(HttpServletRequest request, String uri){

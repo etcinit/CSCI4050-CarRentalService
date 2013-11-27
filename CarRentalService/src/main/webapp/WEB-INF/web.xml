@@ -22,6 +22,7 @@
   	<url-pattern>/login</url-pattern>
   	<url-pattern>/logout</url-pattern>
   	
+  	<url-pattern>/vehicles</url-pattern>
   	<url-pattern>/vehicle/*</url-pattern>
   	<url-pattern>/vehicle/create</url-pattern>
   	<url-pattern>/vehicle/delete/*</url-pattern>

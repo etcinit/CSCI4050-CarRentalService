@@ -1,46 +1,47 @@
 <h1>Create a new vehicle</h1>
-<form role="form">
+<div>{{{alerts}}}</div>
+<form role="form" method="POST" action=/CarRentalService/vehicle/create>
 
   <div class="form-group">
     <label for="vehicleModel">Model</label>
-    <input type="text" class="form-control" id="vehicleModel" placeholder="Enter model name">
+    <input type="text" class="form-control" id="vehicleModel" name="vehicleModel" placeholder="Enter model name">
   </div>
   
   <div class="form-group">
     <label for="vehicleMake">Make</label>
-    <input type="text" class="form-control" id="vehicleMake" placeholder="Enter vehicle make">
+    <input type="text" class="form-control" id="vehicleMake" name="vehicleMake" placeholder="Enter vehicle make">
   </div>
   
   <div class="form-group">
     <label for="vehicleYear">Year</label>
-    <input type="number" class="form-control" id="vehicleYear" placeholder="2013">
+    <input type="number" class="form-control" id="vehicleYear" name="vehicleYear" placeholder="2013">
   </div>
   
   <div class="form-group">
     <label for="vehicleTag">Tag</label>
-    <input type="text" class="form-control" id="vehicleTag" placeholder="000000">
+    <input type="text" class="form-control" id="vehicleTag" name="vehicleTag" placeholder="000000">
   </div>
   
   <div class="form-group">
     <label for="vehicleMilege">Mileage</label>
-    <input type="number" class="form-control" id="vehicleMileage" placeholder="0">
+    <input type="number" class="form-control" id="vehicleMileage" name="vehicleMileage"  placeholder="0">
   </div>
   
   <div class="form-group">
     <label for="vehicleDate">Date</label>
-    <input type="date" class="form-control" id="vehicleDate" placeholder="MM/DD/YYYY">
+    <input type="date" class="form-control" id="vehicleDate" name="vehicleDate" placeholder="MM-DD-YYYY">
   </div>
   
   <div class="form-group">
     <label for="vehicleType">Type</label>
-    <select class="form-control" id="vehicleType">
+    <select class="form-control" id="vehicleType" name="vehicleType">
     	<option>Unknown</option>
     </select>
   </div>
   
   <div class="form-group">
     <label for="vehicleLocation">Location</label>
-    <select class="form-control" id="vehicleLocation">
+    <select class="form-control" id="vehicleLocation" name="vehicleLocation">
     	<option>Unknown</option>
     </select>
   </div>

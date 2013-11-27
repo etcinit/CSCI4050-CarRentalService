@@ -1,5 +1,6 @@
 package edu.uga.csci4050.group3.db;
 
+import java.util.Date;
 import java.util.List;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,8 +12,9 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
-import edu.uga.csci4050.group3.core.Vehicle;
+import edu.uga.csci4050.group3.core.VehicleEntity;
 import static org.jooq.impl.DSL.*;
+import edu.uga.csci4050.group3.jooq.rentalservice.tables.*;
 
 public class DatabaseAbstraction {
 	
@@ -49,9 +51,14 @@ public class DatabaseAbstraction {
 		return "jdbc:mysql://" + HOSTNAME + ":" + PORT + "/" + DATABASE;
 	}
 	
-	public static Vehicle getVehicle(String UID) throws RecordNotFoundException{
+	/** VEHICLES **/
+	
+	public static VehicleEntity getVehicle(String UID) throws RecordNotFoundException{
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
-		List<Vehicle> result = create.select().from(tableByName("VEHICLE")).where(fieldByName("uid").equal(UID)).fetch().into(Vehicle.class);
+		List<VehicleEntity> result = create.select()
+				.from(Vehicle.VEHICLE)
+				.where(Vehicle.VEHICLE.UID.equal(UID))
+				.fetch().into(VehicleEntity.class);
 		if(result.size() > 0){
 			return result.get(0);
 		}else{
@@ -59,11 +66,34 @@ public class DatabaseAbstraction {
 		}
 	}
 	
-	public static void putVehicle(Vehicle vehicle){
+	public static List<VehicleEntity> getVehicles() throws RecordNotFoundException{
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
-		Record vehicleRec = create.newRecord(edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle.VEHICLE,vehicle);
-		create.insertInto(edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle.VEHICLE).set(vehicleRec).execute();
+		List<VehicleEntity> result = create.select()
+				.from(Vehicle.VEHICLE)
+				.fetch().into(VehicleEntity.class);
+		if(result.size() > 0){
+			return result;
+		}else{
+			throw new RecordNotFoundException();
+		}
 	}
+	
+	public static void putVehicle(VehicleEntity vehicle){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		Record vehicleRec = create.newRecord(Vehicle.VEHICLE,vehicle);
+		create.insertInto(Vehicle.VEHICLE).set(vehicleRec).execute();
+	}
+	
+	public static boolean vehicleExists(String UID){
+		try {
+			getVehicle(UID);
+			return true;
+		}catch(RecordNotFoundException ex){
+			return false;
+		}
+	}
+	
+	/** DATABASE MANAGEMENT **/
 	
 	public static void setupDatabase(){
 		Connection conn = getConnection();
@@ -154,5 +184,15 @@ public class DatabaseAbstraction {
 		create.execute("DROP TABLE VEHICLE");
 		create.execute("DROP TABLE VEHICLE_TYPE");
 		create.execute("DROP TABLE RENTAL_LOCATION");
+	}
+	
+	/** TOOLS **/
+	
+	public static Date getDateFromTimestamp(int timestamp){
+		return new Date((long)timestamp * 1000L);
+	}
+	
+	public static int getTimestampFromDate(Date date){
+		return new Long(date.getTime()/1000L).intValue();
 	}
 }
