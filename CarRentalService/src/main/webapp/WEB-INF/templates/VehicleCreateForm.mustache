@@ -1,6 +1,6 @@
 <h1>Create a new vehicle</h1>
 <div>{{{alerts}}}</div>
-<form role="form" method="POST" action=/CarRentalService/vehicle/create>
+<form role="form" method="POST" action={{base_url}}/vehicle/create>
 
   <div class="form-group">
     <label for="vehicleModel">Model</label>
@@ -28,7 +28,7 @@
   </div>
   
   <div class="form-group">
-    <label for="vehicleDate">Date</label>
+    <label for="vehicleDate">Last Service Date</label>
     <input type="date" class="form-control" id="vehicleDate" name="vehicleDate" placeholder="MM-DD-YYYY">
   </div>
   

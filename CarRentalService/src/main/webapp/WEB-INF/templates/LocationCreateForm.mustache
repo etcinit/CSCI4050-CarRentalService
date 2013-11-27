@@ -1,0 +1,41 @@
+<h1>Create a new location</h1>
+<div>{{{alerts}}}</div>
+<form role="form" method="POST" action={{base_url}}/location/create>
+
+  <div class="form-group">
+    <label for="locationName">Name</label>
+    <input type="text" class="form-control" id="locationName" name="locationName" placeholder="Enter location name">
+  </div>
+  
+  <div class="form-group">
+    <label for="locationAddress">Street address</label>
+    <input type="text" class="form-control" id="locationAddress" name="locationAddress" placeholder="Enter street address">
+  </div>
+  
+  <div class="form-group">
+    <label for="locationCity">City</label>
+    <input type="text" class="form-control" id="locationCity" name="locationCity" placeholder="Enter city">
+  </div>
+  
+  <div class="form-group">
+    <label for="locationState">State</label>
+    <input type="text" class="form-control" id="locationState" name="locationState" placeholder="Enter state">
+  </div>
+  
+  <div class="form-group">
+    <label for="locationCountry">Country</label>
+    <input type="text" class="form-control" id="locationCountry" name="locationCountry" placeholder="Enter country">
+  </div>
+  
+  <div class="form-group">
+    <label for="locationZipCode">Zip code</label>
+    <input type="number" class="form-control" id="locationZipCode" name="locationZipCode" placeholder="10000">
+  </div>
+  
+  <div class="form-group">
+    <label for="locationCapacity">Vehicle Capacity</label>
+    <input type="number" class="form-control" id="locationCapacity" name="locationCapacity" placeholder="100">
+  </div>
+
+  <button type="submit" class="btn btn-default">Create</button>
+</form>

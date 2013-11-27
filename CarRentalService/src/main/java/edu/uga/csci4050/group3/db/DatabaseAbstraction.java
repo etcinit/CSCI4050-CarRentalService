@@ -13,8 +13,11 @@ import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
 import edu.uga.csci4050.group3.core.VehicleEntity;
+import edu.uga.csci4050.group3.core.VehicleTypeEntity;
 import static org.jooq.impl.DSL.*;
 import edu.uga.csci4050.group3.jooq.rentalservice.tables.*;
+import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord;
+import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleTypeRecord;
 
 public class DatabaseAbstraction {
 	
@@ -84,6 +87,12 @@ public class DatabaseAbstraction {
 		create.insertInto(Vehicle.VEHICLE).set(vehicleRec).execute();
 	}
 	
+	public static void updateVehicle(VehicleEntity vehicle){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		VehicleRecord vehicleRec = create.newRecord(Vehicle.VEHICLE,vehicle);
+		create.executeUpdate(vehicleRec, Vehicle.VEHICLE.UID.equal(vehicle.getUid()));
+	}
+	
 	public static boolean vehicleExists(String UID){
 		try {
 			getVehicle(UID);
@@ -92,6 +101,73 @@ public class DatabaseAbstraction {
 			return false;
 		}
 	}
+	
+	public static void deleteVehicle(String UID) throws RecordNotFoundException{
+		// Try to find vehicle first. Will throw error if not found
+		getVehicle(UID);
+		
+		// Execute delete query
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		create.delete(Vehicle.VEHICLE)
+		.where(Vehicle.VEHICLE.UID.equal(UID));
+	}
+	
+	/** VEHICLE TYPE **/
+	
+	public static VehicleTypeEntity getVehicleType(String UID) throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<VehicleTypeEntity> result = create.select()
+				.from(VehicleType.VEHICLE_TYPE)
+				.where(VehicleType.VEHICLE_TYPE.UID.equal(UID))
+				.fetch().into(VehicleTypeEntity.class);
+		if(result.size() > 0){
+			return result.get(0);
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static List<VehicleTypeEntity> getVehicleTypes() throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<VehicleTypeEntity> result = create.select()
+				.from(VehicleType.VEHICLE_TYPE)
+				.fetch().into(VehicleTypeEntity.class);
+		if(result.size() > 0){
+			return result;
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static void putVehicleType(VehicleTypeEntity type){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		VehicleTypeRecord typeRec = create.newRecord(VehicleType.VEHICLE_TYPE,type);
+		create.insertInto(VehicleType.VEHICLE_TYPE).set(typeRec).execute();
+	}
+	
+	public static void updateVehicleTYpe(VehicleTypeEntity type){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		VehicleTypeRecord typeRec = create.newRecord(VehicleType.VEHICLE_TYPE,type);
+		create.executeUpdate(typeRec, VehicleType.VEHICLE_TYPE.UID.equal(type.getUid()));
+	}
+	
+	public static void deleteVehicleType(String UID) throws RecordNotFoundException{
+		// Try to find vehicle first. Will throw error if not found
+		getVehicleType(UID);
+		
+		// Execute delete query
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		create.delete(VehicleType.VEHICLE_TYPE)
+		.where(VehicleType.VEHICLE_TYPE.UID.equal(UID));
+	}
+	
+	/** RENTAL LOCATION **/
+	
+	/** RENTAL TRANSACTION **/
+	
+	/** PAYMENT TRANSACTION **/
+	
+	/** USER **/
 	
 	/** DATABASE MANAGEMENT **/
 	
