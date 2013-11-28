@@ -1,8 +1,20 @@
 package edu.uga.csci4050.group3.core;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Map;
+import java.util.Set;
+
 import javax.persistence.Column;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 
 public class UserEntity {
 
@@ -120,9 +132,17 @@ public class UserEntity {
 	public String getRole() {
 		return role;
 	}
+	
+	public UserType getRoleEnum(){
+		return UserType.valueOf(role);
+	}
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+	
+	public void setRoleFromEnum(UserType role){
+		this.role = role.name();
 	}
 
 	public String getLicense() {
@@ -136,9 +156,17 @@ public class UserEntity {
 	public int getDateofbirth() {
 		return dateofbirth;
 	}
+	
+	public Date getDateofbirthDate(){
+		return DatabaseAbstraction.getDateFromTimestamp(dateofbirth);
+	}
 
 	public void setDateofbirth(int dateofbirth) {
 		this.dateofbirth = dateofbirth;
+	}
+	
+	public void setDateofbirthDate(Date dateofbirth){
+		this.dateofbirth = DatabaseAbstraction.getTimestampFromDate(dateofbirth);
 	}
 
 	public String getAddress() {
@@ -173,5 +201,78 @@ public class UserEntity {
 		this.city = city;
 	}
 	
+	public void loadFromForm(Map<String,String[]> formData) throws InvalidInputException{
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		InvalidInputException exception = new InvalidInputException();
+		
+		if(formData.containsKey("userUsername")){
+			setUsername(formData.get("userUsername")[0]);
+		}
+		
+		if(formData.containsKey("userPassword")){
+			setPassword(formData.get("userPassword")[0]);
+		}
+		
+		if(formData.containsKey("userEmail")){
+			setEmail(formData.get("userEmail")[0]);
+		}
+		
+		if(formData.containsKey("userFirstName")){
+			setFirst_name(formData.get("userFirstName")[0]);
+		}
+		
+		if(formData.containsKey("userLastName")){
+			setLast_name(formData.get("userLastName")[0]);
+		}
+		
+		if(formData.containsKey("userRole")){
+			setRole(formData.get("userRole")[0]);
+		}
+		
+		if(formData.containsKey("userLicense")){
+			setLicense(formData.get("userLicense")[0]);
+		}
+		
+		if(formData.containsKey("userDateOfBirth")){
+			try{
+				setDateofbirthDate(sdf.parse(formData.get("userDateOfBirth")[0]));
+			}
+			catch(ParseException e){
+				exception.addMessage("Invalid date format for date of birth");
+			}
+		}
+		
+		if(formData.containsKey("userAddress")){
+			setAddress(formData.get("userAddress")[0]);
+		}
+		
+		if(formData.containsKey("userCountry")){
+			setCountry(formData.get("userCountry")[0]);
+		}
+		
+		if(formData.containsKey("userZipcode")){
+			setZipcode(new Integer(formData.get("userZipcode")[0]));
+		}
+		
+		if(formData.containsKey("userCity")){
+			setCity(formData.get("userCity")[0]);
+		}
+		
+		// Throw exception if one or more conditions fail
+		if(exception.countMessages() > 0){
+			throw exception;
+		}
+	}
 	
+	public void validate() throws InvalidInputException{
+		ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
+		Validator validator = vf.getValidator();
+		Set<ConstraintViolation<UserEntity>> constraintViolations = validator.validate(this);
+		
+		if(constraintViolations.size() > 0){
+			InvalidInputExceptionFactory<UserEntity> iief = new InvalidInputExceptionFactory<UserEntity>();
+			
+			throw iief.buildException(constraintViolations);
+		}
+	}
 }
