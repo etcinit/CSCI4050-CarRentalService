@@ -12,10 +12,18 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import edu.uga.csci4050.group3.core.LocationEntity;
+import edu.uga.csci4050.group3.core.PaymentTransactionEntity;
+import edu.uga.csci4050.group3.core.RentalTransactionEntity;
+import edu.uga.csci4050.group3.core.UserEntity;
 import edu.uga.csci4050.group3.core.VehicleEntity;
 import edu.uga.csci4050.group3.core.VehicleTypeEntity;
 import static org.jooq.impl.DSL.*;
 import edu.uga.csci4050.group3.jooq.rentalservice.tables.*;
+import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.PaymentTransactionRecord;
+import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalLocationRecord;
+import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord;
+import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.UserRecord;
 import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord;
 import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleTypeRecord;
 
@@ -145,7 +153,7 @@ public class DatabaseAbstraction {
 		create.insertInto(VehicleType.VEHICLE_TYPE).set(typeRec).execute();
 	}
 	
-	public static void updateVehicleTYpe(VehicleTypeEntity type){
+	public static void updateVehicleType(VehicleTypeEntity type){
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		VehicleTypeRecord typeRec = create.newRecord(VehicleType.VEHICLE_TYPE,type);
 		create.executeUpdate(typeRec, VehicleType.VEHICLE_TYPE.UID.equal(type.getUid()));
@@ -163,11 +171,167 @@ public class DatabaseAbstraction {
 	
 	/** RENTAL LOCATION **/
 	
+	public static LocationEntity getLocation(String UID) throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<LocationEntity> result = create.select()
+				.from(RentalLocation.RENTAL_LOCATION)
+				.where(RentalLocation.RENTAL_LOCATION.UID.equal(UID))
+				.fetch().into(LocationEntity.class);
+		if(result.size() > 0){
+			return result.get(0);
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static List<LocationEntity> getLocations() throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<LocationEntity> result = create.select()
+				.from(RentalLocation.RENTAL_LOCATION)
+				.fetch().into(LocationEntity.class);
+		if(result.size() > 0){
+			return result;
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static void putLocation(LocationEntity location){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		RentalLocationRecord locRec = create.newRecord(RentalLocation.RENTAL_LOCATION,location);
+		create.insertInto(RentalLocation.RENTAL_LOCATION).set(locRec).execute();
+	}
+	
+	public static void updateLocation(LocationEntity location){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		RentalLocationRecord locRec = create.newRecord(RentalLocation.RENTAL_LOCATION,location);
+		create.executeUpdate(locRec, RentalLocation.RENTAL_LOCATION.UID.equal(locRec.getUid()));
+	}
+	
+	public static void deleteLocation(String UID) throws RecordNotFoundException{
+		// Try to find vehicle first. Will throw error if not found
+		getLocation(UID);
+		
+		// Execute delete query
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		create.delete(RentalLocation.RENTAL_LOCATION)
+		.where(RentalLocation.RENTAL_LOCATION.UID.equal(UID));
+	}
+	
 	/** RENTAL TRANSACTION **/
+	
+	public static RentalTransactionEntity getRentalTransaction(String UID) throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<RentalTransactionEntity> result = create.select()
+				.from(RentalTransaction.RENTAL_TRANSACTION)
+				.where(RentalTransaction.RENTAL_TRANSACTION.UID.equal(UID))
+				.fetch().into(RentalTransactionEntity.class);
+		if(result.size() > 0){
+			return result.get(0);
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static List<RentalTransactionEntity> getRentalTransactions() throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<RentalTransactionEntity> result = create.select()
+				.from(RentalTransaction.RENTAL_TRANSACTION)
+				.fetch().into(RentalTransactionEntity.class);
+		if(result.size() > 0){
+			return result;
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static void putLocation(RentalTransactionEntity transaction){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		RentalTransactionRecord tranRec = create.newRecord(RentalTransaction.RENTAL_TRANSACTION,transaction);
+		create.insertInto(RentalLocation.RENTAL_LOCATION).set(tranRec).execute();
+	}
 	
 	/** PAYMENT TRANSACTION **/
 	
+	public static PaymentTransactionEntity getPaymentTransaction(String UID) throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<PaymentTransactionEntity> result = create.select()
+				.from(PaymentTransaction.PAYMENT_TRANSACTION)
+				.where(PaymentTransaction.PAYMENT_TRANSACTION.UID.equal(UID))
+				.fetch().into(PaymentTransactionEntity.class);
+		if(result.size() > 0){
+			return result.get(0);
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static List<PaymentTransactionEntity> getPaymentTransactions() throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<PaymentTransactionEntity> result = create.select()
+				.from(PaymentTransaction.PAYMENT_TRANSACTION)
+				.fetch().into(PaymentTransactionEntity.class);
+		if(result.size() > 0){
+			return result;
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static void putPaymentTransaction(PaymentTransactionEntity transaction){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		PaymentTransactionRecord tranRec = create.newRecord(PaymentTransaction.PAYMENT_TRANSACTION,transaction);
+		create.insertInto(PaymentTransaction.PAYMENT_TRANSACTION).set(tranRec).execute();
+	}
+	
 	/** USER **/
+	
+	public static UserEntity getUser(String UID) throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<UserEntity> result = create.select()
+				.from(User.USER)
+				.where(User.USER.UID.equal(UID))
+				.fetch().into(UserEntity.class);
+		if(result.size() > 0){
+			return result.get(0);
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static List<UserEntity> getUsers() throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<UserEntity> result = create.select()
+				.from(User.USER)
+				.fetch().into(UserEntity.class);
+		if(result.size() > 0){
+			return result;
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static void putUser(UserEntity user){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		UserRecord userRec = create.newRecord(User.USER,user);
+		create.insertInto(User.USER).set(userRec).execute();
+	}
+	
+	public static void updateUser(UserEntity user){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		UserRecord userRec = create.newRecord(User.USER,user);
+		create.executeUpdate(userRec, User.USER.UID.equal(user.getUid()));
+	}
+	
+	public static void deleteUser(String UID) throws RecordNotFoundException{
+		// Try to find vehicle first. Will throw error if not found
+		getUser(UID);
+		
+		// Execute delete query
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		create.delete(User.USER)
+		.where(User.USER.UID.equal(UID));
+	}
 	
 	/** DATABASE MANAGEMENT **/
 	
