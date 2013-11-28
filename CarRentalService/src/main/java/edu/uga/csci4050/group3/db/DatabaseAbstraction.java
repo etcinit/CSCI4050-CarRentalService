@@ -299,6 +299,19 @@ public class DatabaseAbstraction {
 		}
 	}
 	
+	public static UserEntity getUserByUsername(String Username) throws RecordNotFoundException{
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<UserEntity> result = create.select()
+				.from(User.USER)
+				.where(User.USER.USERNAME.equal(Username))
+				.fetch().into(UserEntity.class);
+		if(result.size() > 0){
+			return result.get(0);
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
 	public static List<UserEntity> getUsers() throws RecordNotFoundException{
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		List<UserEntity> result = create.select()
