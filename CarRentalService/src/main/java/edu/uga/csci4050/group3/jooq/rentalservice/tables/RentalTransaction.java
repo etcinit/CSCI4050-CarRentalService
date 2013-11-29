@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.rentalservice.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RentalTransaction extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord> {
 
-	private static final long serialVersionUID = -498041339;
+	private static final long serialVersionUID = -1454762803;
 
 	/**
 	 * The singleton instance of <code>rentalservice.RENTAL_TRANSACTION</code>
@@ -39,12 +39,12 @@ public class RentalTransaction extends org.jooq.impl.TableImpl<edu.uga.csci4050.
 	/**
 	 * The column <code>rentalservice.RENTAL_TRANSACTION.start_date</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord, java.lang.Short> START_DATE = createField("start_date", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord, java.lang.Integer> START_DATE = createField("start_date", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.RENTAL_TRANSACTION.end_date</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord, java.lang.Short> END_DATE = createField("end_date", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord, java.lang.Integer> END_DATE = createField("end_date", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.RENTAL_TRANSACTION.user</code>. 

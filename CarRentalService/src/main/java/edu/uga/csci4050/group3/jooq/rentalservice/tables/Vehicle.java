@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.rentalservice.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Vehicle extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord> {
 
-	private static final long serialVersionUID = 36841245;
+	private static final long serialVersionUID = -297832455;
 
 	/**
 	 * The singleton instance of <code>rentalservice.VEHICLE</code>
@@ -54,12 +54,12 @@ public class Vehicle extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.joo
 	/**
 	 * The column <code>rentalservice.VEHICLE.year</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord, java.lang.Short> YEAR = createField("year", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord, java.lang.Integer> YEAR = createField("year", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.VEHICLE.mileage</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord, java.lang.Short> MILEAGE = createField("mileage", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord, java.lang.Integer> MILEAGE = createField("mileage", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.VEHICLE.tag</code>. 
@@ -69,7 +69,7 @@ public class Vehicle extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.joo
 	/**
 	 * The column <code>rentalservice.VEHICLE.lastservice</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord, java.lang.Short> LASTSERVICE = createField("lastservice", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord, java.lang.Integer> LASTSERVICE = createField("lastservice", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.VEHICLE.location</code>. 

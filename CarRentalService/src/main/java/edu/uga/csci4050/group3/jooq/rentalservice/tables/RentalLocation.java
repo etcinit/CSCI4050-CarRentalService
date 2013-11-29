@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.rentalservice.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RentalLocation extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalLocationRecord> {
 
-	private static final long serialVersionUID = 834105213;
+	private static final long serialVersionUID = -347567967;
 
 	/**
 	 * The singleton instance of <code>rentalservice.RENTAL_LOCATION</code>
@@ -59,7 +59,7 @@ public class RentalLocation extends org.jooq.impl.TableImpl<edu.uga.csci4050.gro
 	/**
 	 * The column <code>rentalservice.RENTAL_LOCATION.zipcode</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalLocationRecord, java.lang.Short> ZIPCODE = createField("zipcode", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalLocationRecord, java.lang.Integer> ZIPCODE = createField("zipcode", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.RENTAL_LOCATION.city</code>. 
@@ -69,7 +69,7 @@ public class RentalLocation extends org.jooq.impl.TableImpl<edu.uga.csci4050.gro
 	/**
 	 * The column <code>rentalservice.RENTAL_LOCATION.capacity</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalLocationRecord, java.lang.Short> CAPACITY = createField("capacity", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalLocationRecord, java.lang.Integer> CAPACITY = createField("capacity", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * Create a <code>rentalservice.RENTAL_LOCATION</code> table reference

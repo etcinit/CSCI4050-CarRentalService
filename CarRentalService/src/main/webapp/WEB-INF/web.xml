@@ -19,6 +19,7 @@
   	<url-pattern>/index.jsp</url-pattern>
   	<url-pattern>/home</url-pattern>
   	
+  	<url-pattern>/user/register</url-pattern>
   	<url-pattern>/user/login</url-pattern>
   	<url-pattern>/user/logout</url-pattern>
   	<url-pattern>/user/home</url-pattern>

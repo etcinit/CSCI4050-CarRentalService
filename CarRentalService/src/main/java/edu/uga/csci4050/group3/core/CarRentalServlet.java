@@ -55,6 +55,8 @@ public class CarRentalServlet extends HttpServlet {
 			new VehicleCreateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicles")){
 			new VehicleListUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/user/register")){
+			new UserRegisterUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/home")){
 			new UserHomeUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/login")){
@@ -67,7 +69,7 @@ public class CarRentalServlet extends HttpServlet {
 			DatabaseAbstraction.destroyDatabase();
 		}else{
 			// Basic page for debugging URLs
-			LayoutRoot lr = new LayoutRoot(getServletContext());
+			LayoutRoot lr = new LayoutRoot(getServletContext(),request,response);
 			lr.setContent("Page:" + request.getRequestURI());
 			lr.render(response);
 		}

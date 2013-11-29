@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.rentalservice.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.UserRecord> {
 
-	private static final long serialVersionUID = 2032106688;
+	private static final long serialVersionUID = 1320961628;
 
 	/**
 	 * The singleton instance of <code>rentalservice.USER</code>
@@ -74,7 +74,7 @@ public class User extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.r
 	/**
 	 * The column <code>rentalservice.USER.dateofbirth</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.UserRecord, java.lang.Short> DATEOFBIRTH = createField("dateofbirth", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.UserRecord, java.lang.Integer> DATEOFBIRTH = createField("dateofbirth", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.USER.street_address</code>. 
@@ -94,7 +94,7 @@ public class User extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.r
 	/**
 	 * The column <code>rentalservice.USER.zipcode</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.UserRecord, java.lang.Short> ZIPCODE = createField("zipcode", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.UserRecord, java.lang.Integer> ZIPCODE = createField("zipcode", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.USER.city</code>. 

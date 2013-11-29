@@ -364,18 +364,18 @@ public class DatabaseAbstraction {
 						"last_name VARCHAR(255), " +
 						"role VARCHAR(255), " +
 						"license VARCHAR(255), " +
-						"dateofbirth SMALLINT, " +
+						"dateofbirth INT, " +
 						"street_address VARCHAR(255), " +
 						"state VARCHAR(255), " +
 						"country VARCHAR(255), " +
-						"zipcode SMALLINT, " +
+						"zipcode INT, " +
 						"city VARCHAR(255), " +
 						"PRIMARY KEY( id ))");
 		
 		create.execute("CREATE TABLE IF NOT EXISTS PAYMENT_TRANSACTION " +
 						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
-						"date SMALLINT, " +
+						"date INT, " +
 						"method VARCHAR(255), " +
 						"description VARCHAR(255), " +
 						"user VARCHAR(255), " +
@@ -385,8 +385,8 @@ public class DatabaseAbstraction {
 		create.execute("CREATE TABLE IF NOT EXISTS RENTAL_TRANSACTION " +
 						"(id INTEGER NOT NULL AUTO_INCREMENT, " +
 						"uid VARCHAR(255), " +
-						"start_date SMALLINT, " +
-						"end_date SMALLINT, " +
+						"start_date INT, " +
+						"end_date INT, " +
 						"user VARCHAR(255), " +
 						"vehicle VARCHAR(255), " +
 						"PRIMARY KEY( id ))");
@@ -397,10 +397,10 @@ public class DatabaseAbstraction {
 						"type VARCHAR(255), " +
 						"make VARCHAR(255), " +
 						"model VARCHAR(255), " +
-						"year SMALLINT, " +
-						"mileage SMALLINT, " +
+						"year INT, " +
+						"mileage INT, " +
 						"tag VARCHAR(255), " +
-						"lastservice SMALLINT, " +
+						"lastservice INT, " +
 						"location VARCHAR(255), " +
 						"PRIMARY KEY( id ))");
 		
@@ -419,9 +419,9 @@ public class DatabaseAbstraction {
 						"street_address VARCHAR(255), " +
 						"state VARCHAR(255), " +
 						"country VARCHAR(255), " +
-						"zipcode SMALLINT, " +
+						"zipcode INT, " +
 						"city VARCHAR(255), " +
-						"capacity SMALLINT, " +
+						"capacity INT, " +
 						"PRIMARY KEY( id ))");
 		}
 		catch(Exception e){

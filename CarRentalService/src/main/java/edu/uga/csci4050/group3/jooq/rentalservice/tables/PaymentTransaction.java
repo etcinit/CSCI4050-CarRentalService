@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.rentalservice.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class PaymentTransaction extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.PaymentTransactionRecord> {
 
-	private static final long serialVersionUID = 989371957;
+	private static final long serialVersionUID = 1712417199;
 
 	/**
 	 * The singleton instance of <code>rentalservice.PAYMENT_TRANSACTION</code>
@@ -39,7 +39,7 @@ public class PaymentTransaction extends org.jooq.impl.TableImpl<edu.uga.csci4050
 	/**
 	 * The column <code>rentalservice.PAYMENT_TRANSACTION.date</code>. 
 	 */
-	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.PaymentTransactionRecord, java.lang.Short> DATE = createField("date", org.jooq.impl.SQLDataType.SMALLINT, this);
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.PaymentTransactionRecord, java.lang.Integer> DATE = createField("date", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * The column <code>rentalservice.PAYMENT_TRANSACTION.method</code>. 

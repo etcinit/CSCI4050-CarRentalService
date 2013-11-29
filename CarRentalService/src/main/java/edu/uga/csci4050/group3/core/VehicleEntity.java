@@ -143,7 +143,7 @@ public class VehicleEntity {
 	}
 	
 	public void loadFromForm(Map<String, String[]> map) throws InvalidInputException{
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		InvalidInputException exception = new InvalidInputException();
 		
 		// Get form data a put it into a vehicle object
