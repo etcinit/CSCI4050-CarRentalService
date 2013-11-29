@@ -4,20 +4,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.Writer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 public abstract class Template {
 	
-	private ServletContext context;
+	protected ServletContext context;
 
 	public Template(ServletContext context){
 		this.context = context;
 	}
 	
 	abstract public String render();
-	abstract public void render(PrintWriter pw);
+	abstract public void render(Writer pw);
 	
 	public void render(HttpServletResponse response){
 		try {

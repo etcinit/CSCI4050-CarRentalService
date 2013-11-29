@@ -16,7 +16,7 @@ public class Alert extends Template{
 	
 	public Alert(ServletContext context){
 		super(context);
-		type = "error";
+		type = "danger";
 		servlet_name = context.getContextPath();
 	}
 	

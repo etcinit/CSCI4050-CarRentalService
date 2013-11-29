@@ -17,7 +17,7 @@ public class VehicleListUI implements Boundary {
 			RequestType type) {
 		VehicleListControl control = new VehicleListControl();
 		
-		LayoutRoot lr = new LayoutRoot(context);
+		LayoutRoot lr = new LayoutRoot(context,request,response);
 		lr.setTitle("List vehicles");
 		
 		// Tell the control to load the list of vehicles based on the parameters given by the user

@@ -12,4 +12,10 @@ public class UserLogoutControl {
 		
 		sessMan.invalidateSession();
 	}
+	
+	public boolean isLoggedIn(HttpServletRequest request, HttpServletResponse response){
+		SessionManagement sessMan = new SessionManagement(request, response);
+		
+		return sessMan.isUserLoggedIn();
+	}
 }

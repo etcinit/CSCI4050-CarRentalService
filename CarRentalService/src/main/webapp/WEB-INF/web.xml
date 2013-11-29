@@ -19,8 +19,9 @@
   	<url-pattern>/index.jsp</url-pattern>
   	<url-pattern>/home</url-pattern>
   	
-  	<url-pattern>/login</url-pattern>
-  	<url-pattern>/logout</url-pattern>
+  	<url-pattern>/user/login</url-pattern>
+  	<url-pattern>/user/logout</url-pattern>
+  	<url-pattern>/user/home</url-pattern>
   	
   	<url-pattern>/vehicles</url-pattern>
   	<url-pattern>/vehicle/*</url-pattern>

@@ -57,6 +57,10 @@ public class CarRentalServlet extends HttpServlet {
 			new VehicleListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/home")){
 			new UserHomeUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/user/login")){
+			new UserLoginUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/user/logout")){
+			new UserLogoutUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/database/setup")){
 			DatabaseAbstraction.setupDatabase();
 		}else if(uriMatches(request, "/database/destroy")){
@@ -67,6 +71,10 @@ public class CarRentalServlet extends HttpServlet {
 			lr.setContent("Page:" + request.getRequestURI());
 			lr.render(response);
 		}
+	}
+	
+	public static String getFullURL(ServletContext context, String URL){
+		return context.getContextPath() + URL;
 	}
 	
 	private boolean uriMatches(HttpServletRequest request, String uri){

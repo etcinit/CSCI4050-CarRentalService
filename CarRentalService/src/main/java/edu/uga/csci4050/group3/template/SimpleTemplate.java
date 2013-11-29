@@ -3,6 +3,7 @@ package edu.uga.csci4050.group3.template;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,12 +43,17 @@ public class SimpleTemplate extends Template{
 		variables.put("base_url",this.context.getContextPath());
 	}
 	
-	public void render(PrintWriter pw){
+	public void render(Writer pw){
 		DefaultMustacheFactory dmf = new DefaultMustacheFactory();
 		Mustache mustache = dmf.compile(locateTemplate(template_file),template_file);
 		mustache.execute(pw, variables);
 		// Test comment
-		pw.flush();
+		try {
+			pw.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String render(){
