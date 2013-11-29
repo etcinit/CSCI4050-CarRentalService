@@ -5,6 +5,7 @@ import java.util.Map;
 import edu.uga.csci4050.group3.core.InvalidInputException;
 import edu.uga.csci4050.group3.core.VehicleEntity;
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
+import edu.uga.csci4050.group3.db.RecordNotFoundException;
 
 public class VehicleCreateControl {
 	public void create(){
@@ -25,4 +26,25 @@ public class VehicleCreateControl {
 		
 		DatabaseAbstraction.putVehicle(vh);
 	}
+	
+	public boolean isDbPopulated(){
+		// Check that there is at least one location
+		try {
+			DatabaseAbstraction.getLocations();
+		} catch (RecordNotFoundException e) {
+			// There are zero locations
+			return false;
+		}
+		
+		// Check that there is at least one type
+		try {
+			DatabaseAbstraction.getVehicleTypes();
+		} catch (RecordNotFoundException e) {
+			// There are zero types
+			return false;
+		}
+		
+		return true;
+	}
+	
 }

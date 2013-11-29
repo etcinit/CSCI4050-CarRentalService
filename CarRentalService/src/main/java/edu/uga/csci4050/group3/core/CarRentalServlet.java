@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import edu.uga.csci4050.group3.admin.VehicleCreateUI;
+import edu.uga.csci4050.group3.admin.VehicleDeleteUI;
+import edu.uga.csci4050.group3.admin.VehicleUpdateUI;
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
@@ -53,6 +55,10 @@ public class CarRentalServlet extends HttpServlet {
 			new HomeUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicle/create")){
 			new VehicleCreateUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/vehicle/delete")){
+			new VehicleDeleteUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/vehicle/update")){
+			new VehicleUpdateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicles")){
 			new VehicleListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/register")){
@@ -77,6 +83,15 @@ public class CarRentalServlet extends HttpServlet {
 	
 	public static String getFullURL(ServletContext context, String URL){
 		return context.getContextPath() + URL;
+	}
+	
+	public static void redirect(ServletContext context, HttpServletResponse response, String URL){
+		try {
+			response.sendRedirect(getFullURL(context, URL));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private boolean uriMatches(HttpServletRequest request, String uri){

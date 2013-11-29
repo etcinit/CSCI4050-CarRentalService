@@ -117,7 +117,7 @@ public class DatabaseAbstraction {
 		// Execute delete query
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		create.delete(Vehicle.VEHICLE)
-		.where(Vehicle.VEHICLE.UID.equal(UID));
+		.where(Vehicle.VEHICLE.UID.equal(UID)).execute();
 	}
 	
 	/** VEHICLE TYPE **/
@@ -166,7 +166,7 @@ public class DatabaseAbstraction {
 		// Execute delete query
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		create.delete(VehicleType.VEHICLE_TYPE)
-		.where(VehicleType.VEHICLE_TYPE.UID.equal(UID));
+		.where(VehicleType.VEHICLE_TYPE.UID.equal(UID)).execute();
 	}
 	
 	/** RENTAL LOCATION **/
@@ -215,7 +215,7 @@ public class DatabaseAbstraction {
 		// Execute delete query
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		create.delete(RentalLocation.RENTAL_LOCATION)
-		.where(RentalLocation.RENTAL_LOCATION.UID.equal(UID));
+		.where(RentalLocation.RENTAL_LOCATION.UID.equal(UID)).execute();
 	}
 	
 	/** RENTAL TRANSACTION **/
@@ -343,7 +343,7 @@ public class DatabaseAbstraction {
 		// Execute delete query
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		create.delete(User.USER)
-		.where(User.USER.UID.equal(UID));
+		.where(User.USER.UID.equal(UID)).execute();
 	}
 	
 	/** DATABASE MANAGEMENT **/

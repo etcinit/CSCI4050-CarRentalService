@@ -25,17 +25,29 @@ public class VehicleListUI implements Boundary {
 		
 		// Load template for vehicle cards
 		SimpleTemplate cardTemplate = new SimpleTemplate(context, "VehicleCard.mustache");
+		SimpleTemplate adminMenu = new SimpleTemplate(context, "VehicleListAdminMenu.mustache");
 		String vehiclesHtml = "";
+		
+		// Determine if user is admin
+		boolean isAdmin = control.isAdmin(request, response);
+		
+		// Add menu
+		if(isAdmin){
+			vehiclesHtml += adminMenu.render();
+			cardTemplate = new SimpleTemplate(context, "VehicleCardAdmin.mustache");
+		}
 		
 		// Render the template for each vehicle
 		if(vehicles.size() > 0){
+			vehiclesHtml += "<div class=\"row pad-top-10\">";
 			for(VehicleEntity vehicle : vehicles){
 				cardTemplate.setVariables(vehicle.getCustomerData());
 				vehiclesHtml += cardTemplate.render();
 			}
+			vehiclesHtml += "</div>";
 		}else{
 			// Show a message for when there aren't any vehicles 
-			vehiclesHtml = "There aren't vehicles here";
+			vehiclesHtml += "<h4>There aren't vehicles here</h4>";
 		}
 		
 		// Finish the template and display the page

@@ -31,3 +31,13 @@ body {
   min-width: 100%;
   min-height: 500px;
 }
+
+/* TOOLS */
+
+.box-10 {
+	height: 10px;
+}
+
+.pad-top-10 {
+	padding-top: 10px;
+}

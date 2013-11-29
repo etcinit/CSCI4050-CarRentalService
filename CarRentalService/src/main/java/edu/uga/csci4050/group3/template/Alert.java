@@ -1,7 +1,9 @@
 package edu.uga.csci4050.group3.template;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.io.Writer;
 
 import javax.servlet.ServletContext;
 
@@ -14,10 +16,15 @@ public class Alert extends Template{
 	String servlet_name;
 	String content;
 	
-	public Alert(ServletContext context){
+	public Alert(ServletContext context, String content){
 		super(context);
 		type = "danger";
 		servlet_name = context.getContextPath();
+		this.content = content;
+	}
+	
+	public Alert(ServletContext context){
+		this(context, "Unknown message");
 	}
 	
 	public void setContent(String content){
@@ -41,12 +48,17 @@ public class Alert extends Template{
 		}
 	}
 	
-	public void render(PrintWriter pw){
+	public void render(Writer pw){
 		DefaultMustacheFactory dmf = new DefaultMustacheFactory();
 		Mustache mustache = dmf.compile(locateTemplate("Alert.mustache"),"Alert.mustache");
 		mustache.execute(pw, this);
 		// Test comment
-		pw.flush();
+		try {
+			pw.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public String render(){
