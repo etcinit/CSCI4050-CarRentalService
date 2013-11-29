@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import edu.uga.csci4050.group3.admin.VehicleCreateUI;
 import edu.uga.csci4050.group3.admin.VehicleDeleteUI;
+import edu.uga.csci4050.group3.admin.VehicleTypeCreateUI;
+import edu.uga.csci4050.group3.admin.VehicleTypeDeleteUI;
+import edu.uga.csci4050.group3.admin.VehicleTypeListUI;
+import edu.uga.csci4050.group3.admin.VehicleTypeUpdateUI;
 import edu.uga.csci4050.group3.admin.VehicleUpdateUI;
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.template.LayoutRoot;
@@ -61,6 +65,14 @@ public class CarRentalServlet extends HttpServlet {
 			new VehicleUpdateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicles")){
 			new VehicleListUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/vehicletypes")){
+			new VehicleTypeListUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/vehicletype/create")){
+			new VehicleTypeCreateUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/vehicletype/update")){
+			new VehicleTypeUpdateUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/vehicletype/delete")){
+			new VehicleTypeDeleteUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/register")){
 			new UserRegisterUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/home")){

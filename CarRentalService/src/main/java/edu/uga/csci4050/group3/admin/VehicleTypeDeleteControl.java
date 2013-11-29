@@ -21,6 +21,6 @@ public class VehicleTypeDeleteControl {
 		String uid = params.get("uid")[0];
 		
 		// Delete UID from database (if it exists)
-		DatabaseAbstraction.deleteVehicle(uid);
+		DatabaseAbstraction.deleteVehicleType(uid);
 	}
 }

@@ -30,7 +30,7 @@
   	<url-pattern>/vehicle/delete/*</url-pattern>
   	<url-pattern>/vehicle/update/*</url-pattern>
   	
-  	<url-pattern>/vehicletype</url-pattern>
+  	<url-pattern>/vehicletypes</url-pattern>
   	<url-pattern>/vehicletype/*</url-pattern>
   	<url-pattern>/vehicletype/create</url-pattern>
   	<url-pattern>/vehicletype/delete/*</url-pattern>

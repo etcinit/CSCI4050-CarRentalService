@@ -1,7 +1,9 @@
 package edu.uga.csci4050.group3.core;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.validation.ConstraintViolation;
@@ -31,36 +33,48 @@ public class VehicleTypeEntity {
 	@NotNull
 	Double daily_rate;
 
+	@Column(name = "uid")
 	public String getUid() {
 		return uid;
 	}
 
+	@Column(name = "uid")
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
 
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
 
+	@Column(name = "name")
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Column(name = "hourly_rate")
 	public Double getHourly_rate() {
 		return hourly_rate;
 	}
 
+	@Column(name = "hourly_rate")
 	public void setHourly_rate(Double hourly_rate) {
 		this.hourly_rate = hourly_rate;
 	}
 
+	@Column(name = "daily_rate")
 	public Double getDaily_rate() {
 		return daily_rate;
 	}
 
+	@Column(name = "daily_rate")
 	public void setDaily_rate(Double daily_rate) {
 		this.daily_rate = daily_rate;
+	}
+	
+	public VehicleTypeEntity(){
+		this.uid = UUID.randomUUID().toString();
 	}
 	
 	public void loadFromForm(Map<String, String[]> formData){
@@ -87,5 +101,16 @@ public class VehicleTypeEntity {
 			
 			throw iief.buildException(constraintViolations);
 		}
+	}
+	
+	public Map<String, String> getData(){
+		Map<String, String> data = new HashMap<String, String>();
+		
+		data.put("uid", this.uid);
+		data.put("name", this.name);
+		data.put("hourly_rate", String.valueOf(this.hourly_rate));
+		data.put("daily_rate", String.valueOf(this.daily_rate));
+		
+		return data;
 	}
 }

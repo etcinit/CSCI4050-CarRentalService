@@ -8,6 +8,7 @@ import edu.uga.csci4050.group3.core.InvalidInputException;
 import edu.uga.csci4050.group3.core.InvalidUrlException;
 import edu.uga.csci4050.group3.core.VehicleTypeEntity;
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
+import edu.uga.csci4050.group3.db.RecordNotFoundException;
 
 public class VehicleTypeUpdateControl {
 
@@ -30,6 +31,16 @@ public class VehicleTypeUpdateControl {
 		type.validate();
 		
 		// Send to database
-		DatabaseAbstraction.putVehicleType(type);
+		DatabaseAbstraction.updateVehicleType(type);
+	}
+
+	public VehicleTypeEntity getVehicleType(HttpServletRequest request) throws InvalidUrlException, RecordNotFoundException {
+		if(!request.getParameterMap().containsKey("uid")){
+			throw new InvalidUrlException();
+		}
+		
+		VehicleTypeEntity type = DatabaseAbstraction.getVehicleType(request.getParameter("uid"));
+		
+		return type;
 	}
 }
