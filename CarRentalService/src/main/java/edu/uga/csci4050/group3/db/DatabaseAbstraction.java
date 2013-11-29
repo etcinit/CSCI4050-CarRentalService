@@ -147,6 +147,19 @@ public class DatabaseAbstraction {
 		}
 	}
 	
+	public static String getVehicleTypesSelect(){
+		try {
+			List<VehicleTypeEntity> list = getVehicleTypes();
+			String options = "";
+			for(VehicleTypeEntity vtype : list){
+				options += "<option value=\"" + vtype.getUid() + "\">" + vtype.getName() + "</option>";
+			}
+			return options;
+		} catch (RecordNotFoundException e) {
+			return "";
+		}
+	}
+	
 	public static void putVehicleType(VehicleTypeEntity type){
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		VehicleTypeRecord typeRec = create.newRecord(VehicleType.VEHICLE_TYPE,type);
@@ -193,6 +206,19 @@ public class DatabaseAbstraction {
 			return result;
 		}else{
 			throw new RecordNotFoundException();
+		}
+	}
+	
+	public static String getLocationsSelect(){
+		try {
+			List<LocationEntity> list = getLocations();
+			String options = "";
+			for(LocationEntity loc : list){
+				options += "<option value=\"" + loc.getUid() + "\">" + loc.getName() + "</option>";
+			}
+			return options;
+		} catch (RecordNotFoundException e) {
+			return "";
 		}
 	}
 	

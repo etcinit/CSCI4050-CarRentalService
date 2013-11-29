@@ -13,6 +13,7 @@ import edu.uga.csci4050.group3.core.InvalidUrlException;
 import edu.uga.csci4050.group3.core.RequestType;
 import edu.uga.csci4050.group3.core.UserType;
 import edu.uga.csci4050.group3.core.VehicleEntity;
+import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.db.RecordNotFoundException;
 import edu.uga.csci4050.group3.db.SessionManagement;
 import edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle;
@@ -50,6 +51,9 @@ public class VehicleUpdateUI implements Boundary {
 			return;
 		}
 		
+		// Populate form fields
+		updateForm.setVariable("select_types", DatabaseAbstraction.getVehicleTypesSelect());
+		updateForm.setVariable("select_locations", DatabaseAbstraction.getLocationsSelect());
 
 		if(type == RequestType.POST){
 			try {

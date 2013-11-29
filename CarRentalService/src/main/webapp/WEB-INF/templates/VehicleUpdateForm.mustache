@@ -43,7 +43,8 @@
     <label for="vehicleType">Type</label>
     <select class="form-control" id="vehicleType" name="vehicleType">
     	<option selected>{{type}}</option>
-    	<option>Unknown</option>
+    	{{{select_types}}}
+    	<option value="0000-0000-0000-0000">Unknown</option>
     </select>
   </div>
   
@@ -51,7 +52,8 @@
     <label for="vehicleLocation">Location</label>
     <select class="form-control" id="vehicleLocation" name="vehicleLocation">
     	<option selected>{{location}}</option>
-    	<option>Unknown</option>
+    	{{{select_locations}}}
+    	<option value="0000-0000-0000-0000">Unknown</option>
     </select>
   </div>
 

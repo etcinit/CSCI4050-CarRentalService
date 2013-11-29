@@ -3,6 +3,7 @@ package edu.uga.csci4050.group3.core;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -326,5 +327,24 @@ public class UserEntity {
 			
 			throw iief.buildException(constraintViolations);
 		}
+	}
+	
+	public Map<String, String> getData(){
+		Map<String, String> data = new HashMap<String, String>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		data.put("uid",this.uid);
+		data.put("username",this.username);
+		data.put("first_name",this.first_name);
+		data.put("last_name",this.last_name);
+		data.put("email",this.email);
+		data.put("address",this.address);
+		data.put("state",this.state);
+		data.put("country",this.country);
+		data.put("license",this.license);
+		data.put("dateofbirth",sdf.format(this.dateofbirth));
+		data.put("zipcode", String.valueOf(this.zipcode));
+		
+		return data;
 	}
 }

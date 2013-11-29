@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.uga.csci4050.group3.admin.UserListUI;
 import edu.uga.csci4050.group3.admin.VehicleCreateUI;
 import edu.uga.csci4050.group3.admin.VehicleDeleteUI;
 import edu.uga.csci4050.group3.admin.VehicleTypeCreateUI;
@@ -73,6 +74,8 @@ public class CarRentalServlet extends HttpServlet {
 			new VehicleTypeUpdateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicletype/delete")){
 			new VehicleTypeDeleteUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/users")){
+			new UserListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/register")){
 			new UserRegisterUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/home")){

@@ -223,13 +223,14 @@ public class VehicleEntity {
 	
 	public Map<String, String> getAdminData(){
 		Map<String, String> data = new HashMap<String, String>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		data.put("uid", this.uid);
 		data.put("model", this.model);
 		data.put("make", this.make);
 		data.put("year", String.valueOf(this.year));
 		data.put("type", this.type);
-		data.put("lastservice", String.valueOf(this.lastservice));
+		data.put("lastservice", sdf.format(this.lastservice));
 		data.put("tag", this.tag);
 		data.put("mileage", String.valueOf(this.mileage));
 		data.put("location", this.location);
