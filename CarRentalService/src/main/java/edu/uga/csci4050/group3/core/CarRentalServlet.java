@@ -74,6 +74,10 @@ public class CarRentalServlet extends HttpServlet {
 			new VehicleTypeUpdateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicletype/delete")){
 			new VehicleTypeDeleteUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/locations")){
+			new LocationListUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/location")){
+			new LocationViewUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/users")){
 			new UserListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/register")){

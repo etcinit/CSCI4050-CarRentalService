@@ -1,5 +1,7 @@
 package edu.uga.csci4050.group3.core;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,11 +19,32 @@ public class LocationListUI implements Boundary {
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate list = new SimpleTemplate(context, "LocationList.mustache");
 		LocationListControl control = new LocationListControl();
+		lr.setTitle("Locations");
 		
 		// Check if user is admin
 		boolean isAdmin = control.isAdmin(request, response);
+		if(isAdmin){
+			SimpleTemplate menu = new SimpleTemplate(context, "LocationListAdminMenu.mustache");
+			list.setVariable("extra_options", menu.render());
+		}
 		
+		// Get list of locations
+		List<LocationEntity> locations = control.getList();
 		
+		if(locations.size() > 0){
+			String locationsHtml = "";
+			for(LocationEntity loc : locations){
+				SimpleTemplate locRow = new SimpleTemplate(context, "LocationRow.mustache");
+				locRow.setVariables(loc.getData());
+				locationsHtml += locRow.render();
+			}
+			list.setVariable("locations", locationsHtml);
+		}else{
+			list.setVariable("message", "<h4>No locations found</h4>");
+		}
+		
+		lr.setContent(list.render());
+		lr.render(response);
 	}
 
 }

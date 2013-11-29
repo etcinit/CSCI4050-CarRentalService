@@ -1,0 +1,36 @@
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="page-header">
+			<h1>Location details</h1>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<ul class="nav nav-pills">
+		  <li><a href="{{base_url}}/locations">View other locations</a></li>
+		  <li class="active"><a href="#">View details</a></li>
+		  {{{extra_options}}}
+		</ul>
+	</div>
+</div>
+<div class="row pad-top-10">
+	<div class="col-md-6 col-md-offset-3">
+		<p>Street address: {{street_address}}</p>
+		<p>City: {{city}}</p>
+		<p>Zipcode: {{zipcode}}</p>
+		<p>State: {{state}}</p>
+		<p>Country: {{country}}</p>
+		<p>Capacity: {{capacity}}</p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="page-header">
+			<h3>Vehicles at this location</h3>
+			<div class="row">
+				{{vehicles}}
+			</div>
+		</div>
+	</div>
+</div>

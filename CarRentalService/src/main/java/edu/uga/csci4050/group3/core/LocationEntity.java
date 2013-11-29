@@ -1,5 +1,6 @@
 package edu.uga.csci4050.group3.core;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -169,5 +170,20 @@ public class LocationEntity {
 			
 			throw iief.buildException(constraintViolations);
 		}
+	}
+	
+	public Map<String, String> getData(){
+		Map<String,String> data = new HashMap<String, String>();
+		
+		data.put("uid", this.uid);
+		data.put("name", this.name);
+		data.put("street_address", this.uid);
+		data.put("state", this.state);
+		data.put("country", this.country);
+		data.put("zipcode", String.valueOf(this.zipcode));
+		data.put("city", this.city);
+		data.put("capacity", String.valueOf(this.capacity));
+		
+		return data;
 	}
 }
