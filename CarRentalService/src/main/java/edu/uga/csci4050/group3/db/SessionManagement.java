@@ -163,6 +163,25 @@ public class SessionManagement {
 			return;
 		}
 		
-		request.getSession().invalidate();
+		if(request.getSession() != null){
+			request.getSession().invalidate();
+		}
+	}
+	
+	public UserType getUserRole() throws SessionException{
+		if(!isUserLoggedIn()){
+			throw new SessionException();
+		}
+		
+		try {
+			UserEntity user = DatabaseAbstraction.getUserByUsername(getLoggedinUsername());
+			
+			return user.getRoleEnum();
+		} catch (RecordNotFoundException e) {
+			// User not found in db
+			throw new SessionException();
+		} catch (AuthenticationException e) {
+			throw new SessionException();
+		}
 	}
 }

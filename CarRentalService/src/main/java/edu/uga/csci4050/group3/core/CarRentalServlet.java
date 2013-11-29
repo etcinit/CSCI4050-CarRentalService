@@ -48,13 +48,15 @@ public class CarRentalServlet extends HttpServlet {
 		// This where routing happens. An instance of the corresponding boundary class is created
 		// depending on the URL
 		if(uriMatches(request, "/login")){
-			new LoginUI().handleRequest(request, response, context, type);
+			new UserLoginUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/") || uriMatches(request, "/home")){
 			new HomeUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicle/create")){
 			new VehicleCreateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/vehicles")){
 			new VehicleListUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/user/home")){
+			new UserHomeUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/database/setup")){
 			DatabaseAbstraction.setupDatabase();
 		}else if(uriMatches(request, "/database/destroy")){

@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 
-public class LoginUI implements Boundary {
+public class UserLoginUI implements Boundary {
 
 	@Override
 	public void handleRequest(HttpServletRequest request,
