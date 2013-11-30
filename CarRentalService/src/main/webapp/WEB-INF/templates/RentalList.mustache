@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
-			<h1>All registered users</h1>
+			<h1>All rental transactions</h1>
 		</div>
 	</div>
 </div>
@@ -9,6 +9,7 @@
 	<div class="col-md-12">
 		<ul class="nav nav-pills">
 		  <li class="active"><a href="#">List</a></li>
+		  {{{extra_options}}}
 		</ul>
 	</div>
 </div>
@@ -18,15 +19,15 @@
 		<table class="table pad-top-10">
 			<thead>
 				<tr>
-					<th>Username</th>
-					<th>First name</th>
-					<th>Last name</th>
-					<th>Role</th>
+					<th>User</th>
+					<th>Vehicle</th>
+					<th>Start date</th>
+					<th>End date</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
 			<tbody>
-				{{{users}}}
+				{{{rentals}}}
 			</tbody>
 		</table>
 	</div>

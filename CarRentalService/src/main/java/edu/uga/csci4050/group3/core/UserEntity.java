@@ -342,6 +342,7 @@ public class UserEntity {
 		data.put("state",this.state);
 		data.put("country",this.country);
 		data.put("license",this.license);
+		data.put("role", getRoleEnum().toString());
 		data.put("dateofbirth",sdf.format(this.dateofbirth));
 		data.put("zipcode", String.valueOf(this.zipcode));
 		

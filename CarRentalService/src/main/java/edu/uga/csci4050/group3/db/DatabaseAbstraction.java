@@ -271,10 +271,20 @@ public class DatabaseAbstraction {
 		}
 	}
 	
-	public static void putLocation(RentalTransactionEntity transaction){
+	public static void putRentalTransaction(RentalTransactionEntity transaction){
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		RentalTransactionRecord tranRec = create.newRecord(RentalTransaction.RENTAL_TRANSACTION,transaction);
 		create.insertInto(RentalLocation.RENTAL_LOCATION).set(tranRec).execute();
+	}
+	
+	public static void deleteRentalTransaction(String UID) throws RecordNotFoundException{
+		// Try to find vehicle first. Will throw error if not found
+		getRentalTransaction(UID);
+		
+		// Execute delete query
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		create.delete(RentalTransaction.RENTAL_TRANSACTION)
+		.where(RentalTransaction.RENTAL_TRANSACTION.UID.equal(UID)).execute();
 	}
 	
 	/** PAYMENT TRANSACTION **/

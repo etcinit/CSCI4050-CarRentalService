@@ -16,16 +16,25 @@ public class UserHomeUI implements Boundary{
 			HttpServletResponse response, ServletContext context,
 			RequestType type) {
 		// TEMP: Display a basic page
-		UserHomeControl uhc = new UserHomeControl();
+		UserHomeControl control = new UserHomeControl();
 		LayoutRoot lr = new LayoutRoot(context,request,response);
 		
-		if(uhc.isLoggedIn(request, response)){
-			SimpleTemplate centCol = new SimpleTemplate(context, "CenteredColumn.mustache");
+		if(control.isLoggedIn(request, response)){
+			SimpleTemplate custLayout = new SimpleTemplate(context, "UserHomeLayout.mustache");
+			SimpleTemplate adminLayout = new SimpleTemplate(context, "UserHomeLayoutAdmin.mustache");
 			SimpleTemplate custMenu = new SimpleTemplate(context, "UserHomeCustomer.mustache");
-			centCol.setVariable("content", custMenu.render());
-			lr.setContent(centCol.render());
-			//lr.setContent("Role:" + uhc.getRoleString(request, response));
-			lr.render(response);
+			SimpleTemplate adminMenu = new SimpleTemplate(context, "UserHomeAdmin.mustache");
+			
+			if(control.isAdmin(request, response)){
+				adminLayout.setVariable("user_menu", custMenu.render());
+				adminLayout.setVariable("admin_menu", adminMenu.render());
+				lr.setContent(adminLayout.render());
+				lr.render(response);
+			}else{
+				custLayout.setVariable("user_menu", custMenu.render());
+				lr.setContent(custLayout.render());
+				lr.render(response);
+			}
 		}else{
 			try {
 				response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/login"));

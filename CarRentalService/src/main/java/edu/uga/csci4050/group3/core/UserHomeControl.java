@@ -26,4 +26,22 @@ public class UserHomeControl {
 		
 		return role;
 	}
+	
+	public boolean isAdmin(HttpServletRequest request, HttpServletResponse response){
+		SessionManagement sessMan = new SessionManagement(request, response);
+		
+		if(sessMan.isUserLoggedIn()){
+			try {
+				if(sessMan.getUserRole() == UserType.ADMIN){
+					return true;
+				}else{
+					return false;
+				}
+			} catch (SessionException e) {
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
 }

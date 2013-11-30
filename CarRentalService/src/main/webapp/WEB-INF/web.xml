@@ -24,6 +24,7 @@
   	<url-pattern>/user/login</url-pattern>
   	<url-pattern>/user/logout</url-pattern>
   	<url-pattern>/user/home</url-pattern>
+  	<url-pattern>/user/updaterole</url-pattern>
   	
   	<url-pattern>/vehicles</url-pattern>
   	<url-pattern>/vehicle/*</url-pattern>
@@ -42,6 +43,11 @@
   	<url-pattern>/location/create</url-pattern>
   	<url-pattern>/location/delete/*</url-pattern>
   	<url-pattern>/location/update/*</url-pattern>
+  	
+  	<url-pattern>/rentals</url-pattern>
+  	<url-pattern>/rental/cancel</url-pattern>
+  	
+  	<url-pattern>/service</url-pattern>
   	
   	<url-pattern>/database/setup</url-pattern>
   	<url-pattern>/database/destroy</url-pattern>

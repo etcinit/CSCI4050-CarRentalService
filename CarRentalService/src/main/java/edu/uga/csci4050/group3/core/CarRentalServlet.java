@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import edu.uga.csci4050.group3.admin.LocationCreateUI;
 import edu.uga.csci4050.group3.admin.LocationDeleteUI;
 import edu.uga.csci4050.group3.admin.LocationUpdateUI;
+import edu.uga.csci4050.group3.admin.RentalCancelUI;
+import edu.uga.csci4050.group3.admin.RentalListUI;
+import edu.uga.csci4050.group3.admin.ServiceManagementUI;
 import edu.uga.csci4050.group3.admin.UserListUI;
+import edu.uga.csci4050.group3.admin.UserUpdateRoleUI;
 import edu.uga.csci4050.group3.admin.VehicleCreateUI;
 import edu.uga.csci4050.group3.admin.VehicleDeleteUI;
 import edu.uga.csci4050.group3.admin.VehicleTypeCreateUI;
@@ -87,6 +91,10 @@ public class CarRentalServlet extends HttpServlet {
 			new LocationUpdateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/location/delete")){
 			new LocationDeleteUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/rentals")){
+			new RentalListUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/rental/cancel")){
+			new RentalCancelUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/users")){
 			new UserListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/register")){
@@ -97,6 +105,10 @@ public class CarRentalServlet extends HttpServlet {
 			new UserLoginUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/logout")){
 			new UserLogoutUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/user/updaterole")){
+			new UserUpdateRoleUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/service")){
+			new ServiceManagementUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/database/setup")){
 			DatabaseAbstraction.setupDatabase();
 		}else if(uriMatches(request, "/database/destroy")){
