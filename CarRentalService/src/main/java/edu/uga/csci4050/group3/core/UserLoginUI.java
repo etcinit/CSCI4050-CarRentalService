@@ -20,6 +20,8 @@ public class UserLoginUI implements Boundary {
 		SimpleTemplate loginForm = new SimpleTemplate(context, "LoginForm.mustache");
 		SimpleTemplate centCol = new SimpleTemplate(context, "CenteredColumn.mustache");
 		
+		lr.setTitle("Login");
+		
 		if(type == RequestType.GET){
 			// Show the login form
 			centCol.setVariable("content", loginForm.render());

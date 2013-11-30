@@ -10,29 +10,28 @@ import edu.uga.csci4050.group3.core.Boundary;
 import edu.uga.csci4050.group3.core.CarRentalServlet;
 import edu.uga.csci4050.group3.core.InvalidInputException;
 import edu.uga.csci4050.group3.core.InvalidUrlException;
+import edu.uga.csci4050.group3.core.LocationEntity;
 import edu.uga.csci4050.group3.core.RequestType;
 import edu.uga.csci4050.group3.core.UserType;
 import edu.uga.csci4050.group3.core.VehicleEntity;
-import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.db.RecordNotFoundException;
 import edu.uga.csci4050.group3.db.SessionManagement;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle;
 import edu.uga.csci4050.group3.template.Alert;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 
-public class VehicleUpdateUI implements Boundary {
+public class LocationUpdateUI implements Boundary {
 
 	@Override
 	public void handleRequest(HttpServletRequest request,
 			HttpServletResponse response, ServletContext context,
 			RequestType type) {
 		
-		VehicleUpdateControl control = new VehicleUpdateControl();
+		LocationUpdateControl control = new LocationUpdateControl();
 		LayoutRoot lr = new LayoutRoot(context, request, response);
-		SimpleTemplate updateForm = new SimpleTemplate(context, "VehicleUpdateForm.mustache");
+		SimpleTemplate updateForm = new SimpleTemplate(context, "LocationUpdateForm.mustache");
 		
-		lr.setTitle("Update vehicle");
+		lr.setTitle("Update location");
 		
 		// Check if the user is authorized
 		if(new SessionManagement(request, response).requireRole(UserType.ADMIN, CarRentalServlet.getFullURL(context, "/user/home"))){
@@ -41,11 +40,11 @@ public class VehicleUpdateUI implements Boundary {
 		
 		// Try to load item data
 		try{
-		VehicleEntity vehicle = control.getVehicle(request);
-			updateForm.setVariables(vehicle.getAdminData());
+			LocationEntity location = control.getLocation(request);
+			updateForm.setVariables(location.getData());
 		}
 		catch(RecordNotFoundException ex){
-			lr.setContent(new Alert(context,"Vehicle with UID not found").render());
+			lr.setContent(new Alert(context,"Location with UID not found").render());
 			lr.render(response);
 			return;
 		}
@@ -54,15 +53,11 @@ public class VehicleUpdateUI implements Boundary {
 			lr.render(response);
 			return;
 		}
-		
-		// Populate form fields
-		updateForm.setVariable("select_types", DatabaseAbstraction.getVehicleTypesSelect());
-		updateForm.setVariable("select_locations", DatabaseAbstraction.getLocationsSelect());
 
 		if(type == RequestType.POST){
 			try {
-				control.updateVehicle(request);
-				response.sendRedirect(CarRentalServlet.getFullURL(context, "/vehicles"));
+				control.update(request);
+				response.sendRedirect(CarRentalServlet.getFullURL(context, "/locations"));
 			} catch (InvalidInputException e) {
 				// Display error messages
 				updateForm.setVariable("alerts", e.getMessagesHtml(context));

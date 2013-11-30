@@ -64,66 +64,82 @@ public class LocationEntity {
 		this.street_address = "Unknown";
 	}
 
+	@Column(name = "uid")
 	public String getUid() {
 		return uid;
 	}
 
+	@Column(name = "uid")
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
 
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
 
+	@Column(name = "name")
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	@Column(name = "street_address")
 	public String getStreet_address() {
 		return street_address;
 	}
 
+	@Column(name = "street_address")
 	public void setStreet_address(String street_address) {
 		this.street_address = street_address;
 	}
 
+	@Column(name = "state")
 	public String getState() {
 		return state;
 	}
 
+	@Column(name = "state")
 	public void setState(String state) {
 		this.state = state;
 	}
 
+	@Column(name = "country")
 	public String getCountry() {
 		return country;
 	}
 
+	@Column(name = "country")
 	public void setCountry(String country) {
 		this.country = country;
 	}
 
+	@Column(name = "zipcode")
 	public int getZipcode() {
 		return zipcode;
 	}
 
+	@Column(name = "zipcode")
 	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
 
+	@Column(name = "city")
 	public String getCity() {
 		return city;
 	}
 
+	@Column(name = "city")
 	public void setCity(String city) {
 		this.city = city;
 	}
 
+	@Column(name = "capacity")
 	public int getCapacity() {
 		return capacity;
 	}
 
+	@Column(name = "capacity")
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
@@ -177,7 +193,7 @@ public class LocationEntity {
 		
 		data.put("uid", this.uid);
 		data.put("name", this.name);
-		data.put("street_address", this.uid);
+		data.put("street_address", this.street_address);
 		data.put("state", this.state);
 		data.put("country", this.country);
 		data.put("zipcode", String.valueOf(this.zipcode));

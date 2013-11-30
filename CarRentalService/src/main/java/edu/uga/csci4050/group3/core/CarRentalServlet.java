@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import edu.uga.csci4050.group3.admin.LocationCreateUI;
+import edu.uga.csci4050.group3.admin.LocationDeleteUI;
+import edu.uga.csci4050.group3.admin.LocationUpdateUI;
 import edu.uga.csci4050.group3.admin.UserListUI;
 import edu.uga.csci4050.group3.admin.VehicleCreateUI;
 import edu.uga.csci4050.group3.admin.VehicleDeleteUI;
@@ -78,6 +81,12 @@ public class CarRentalServlet extends HttpServlet {
 			new LocationListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/location")){
 			new LocationViewUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/location/create")){
+			new LocationCreateUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/location/update")){
+			new LocationUpdateUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/location/delete")){
+			new LocationDeleteUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/users")){
 			new UserListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/register")){
