@@ -43,12 +43,22 @@ public class RentalTransactionEntity {
 	@Column(name = "vehicle")
 	String vehicle;
 	
+	@NotNull
+	@Size(min = 1)
+	@Column(name = "status")
+	String status;
+	
+	@Column(name = "comments")
+	String comments;
+	
 	public RentalTransactionEntity(){
 		this.uid = UUID.randomUUID().toString();
 		this.start_date = 0;
 		this.end_date = 0;
 		this.user = "Unknown";
 		this.vehicle = "Unknown";
+		setStatusEnum(RentalStatus.ACTIVE);
+		this.comments = "None";
 	}
 
 	@Column(name = "uid")
@@ -117,6 +127,34 @@ public class RentalTransactionEntity {
 		this.vehicle = vehicle;
 	}
 	
+	@Column(name = "status")
+	public String getStatus() {
+		return status;
+	}
+	
+	public RentalStatus getStatusEnum(){
+		return RentalStatus.valueOf(status);
+	}
+
+	@Column(name = "status")
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
+	public void setStatusEnum(RentalStatus status){
+		this.status = status.toString();
+	}
+
+	@Column(name = "comments")
+	public String getComments() {
+		return comments;
+	}
+
+	@Column(name = "comments")
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
 	public void validate() throws InvalidInputException{
 		ValidatorFactory vf = Validation.buildDefaultValidatorFactory();
 		Validator validator = vf.getValidator();
@@ -149,6 +187,8 @@ public class RentalTransactionEntity {
 		data.put("start_date", sdf.format(getStart_dateDate()));
 		data.put("end_date", sdf.format(getEnd_dateDate()));
 		data.put("vehicle", this.vehicle);
+		data.put("status", this.status);
+		data.put("comments", this.comments);
 		
 		return data;
 	}

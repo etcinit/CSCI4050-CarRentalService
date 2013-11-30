@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.rentalservice.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class RentalTransaction extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord> {
 
-	private static final long serialVersionUID = -1454762803;
+	private static final long serialVersionUID = -220538585;
 
 	/**
 	 * The singleton instance of <code>rentalservice.RENTAL_TRANSACTION</code>
@@ -55,6 +55,16 @@ public class RentalTransaction extends org.jooq.impl.TableImpl<edu.uga.csci4050.
 	 * The column <code>rentalservice.RENTAL_TRANSACTION.vehicle</code>. 
 	 */
 	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord, java.lang.String> VEHICLE = createField("vehicle", org.jooq.impl.SQLDataType.VARCHAR.length(255), this);
+
+	/**
+	 * The column <code>rentalservice.RENTAL_TRANSACTION.status</code>. 
+	 */
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord, java.lang.String> STATUS = createField("status", org.jooq.impl.SQLDataType.VARCHAR.length(255), this);
+
+	/**
+	 * The column <code>rentalservice.RENTAL_TRANSACTION.comments</code>. 
+	 */
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord, java.lang.String> COMMENTS = createField("comments", org.jooq.impl.SQLDataType.VARCHAR.length(255), this);
 
 	/**
 	 * Create a <code>rentalservice.RENTAL_TRANSACTION</code> table reference

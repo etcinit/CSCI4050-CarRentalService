@@ -16,6 +16,7 @@ import edu.uga.csci4050.group3.core.LocationEntity;
 import edu.uga.csci4050.group3.core.PaymentTransactionEntity;
 import edu.uga.csci4050.group3.core.RentalTransactionEntity;
 import edu.uga.csci4050.group3.core.UserEntity;
+import edu.uga.csci4050.group3.core.UserType;
 import edu.uga.csci4050.group3.core.VehicleEntity;
 import edu.uga.csci4050.group3.core.VehicleTypeEntity;
 import static org.jooq.impl.DSL.*;
@@ -277,6 +278,12 @@ public class DatabaseAbstraction {
 		create.insertInto(RentalLocation.RENTAL_LOCATION).set(tranRec).execute();
 	}
 	
+	public static void updateRentalTransaction(RentalTransactionEntity transaction){
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		RentalTransactionRecord tranRec = create.newRecord(RentalTransaction.RENTAL_TRANSACTION,transaction);
+		create.executeUpdate(tranRec, RentalTransaction.RENTAL_TRANSACTION.UID.equal(transaction.getUid()));
+	}
+	
 	public static void deleteRentalTransaction(String UID) throws RecordNotFoundException{
 		// Try to find vehicle first. Will throw error if not found
 		getRentalTransaction(UID);
@@ -416,6 +423,8 @@ public class DatabaseAbstraction {
 						"description VARCHAR(255), " +
 						"user VARCHAR(255), " +
 						"reason VARCHAR(255), " +
+						"comments VARCHAR(255), " +
+						"status VARCHAR(255), " +
 						"PRIMARY KEY( id ))");
 
 		create.execute("CREATE TABLE IF NOT EXISTS RENTAL_TRANSACTION " +
@@ -459,6 +468,24 @@ public class DatabaseAbstraction {
 						"city VARCHAR(255), " +
 						"capacity INT, " +
 						"PRIMARY KEY( id ))");
+		
+		// Create an admin user
+		UserEntity admin = new UserEntity();
+		admin.setUsername("admin");
+		admin.setPassword("admin");
+		admin.setFirst_name("admin");
+		admin.setLast_name("admin");
+		admin.setStreet_Address("Broad St");
+		admin.setEmail("email@email.com");
+		admin.setCity("Athens");
+		admin.setCountry("USA");
+		admin.setState("Georgia");
+		admin.setDateofbirth(0);
+		admin.setRoleFromEnum(UserType.ADMIN);
+		admin.setLicense("0000-0000");
+		admin.setZipcode(30000);
+		
+		putUser(admin);
 		}
 		catch(Exception e){
 			e.printStackTrace();

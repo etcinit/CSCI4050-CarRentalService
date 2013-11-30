@@ -11,7 +11,7 @@ public class RentalLocationsControl {
 	 public LocationEntity findRentalLocation(String address){
 		 
 		 
-		 return ;
+		 return null;
 	 }
 	 
 }
