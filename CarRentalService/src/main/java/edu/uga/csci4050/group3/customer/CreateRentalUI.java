@@ -22,21 +22,41 @@ public class CreateRentalUI implements Boundary {
 		CreateRentalControl control = new CreateRentalControl();
 		lr.setTitle("Rental");
 		VehicleEntity vehicle;
-		try {
-			vehicle = control.getVehicle(request);
-			cardTemplate.setVariables(vehicle.getCustomerData());
-			
-			lr.setContent(cardTemplate.render());
-			lr.render(response);
-			
-			
-		} catch (InvalidUrlException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RecordNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} //locate the vehicle object user wishes to rent
+		
+		if(type == type.GET){
+			try {
+				vehicle = control.getVehicle(request); //locate the vehicle user wishes to rent.
+				cardTemplate.setVariables(vehicle.getCustomerData()); 
+				
+				lr.setContent(cardTemplate.render());
+				lr.render(response);
+				
+				// Find vehicle
+				// Show form
+			} catch (InvalidUrlException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RecordNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}else{
+			try {
+				// Check 
+				// rent?uid=8394&start_date=8958437&end_date=924586
+				control.checkReservationDates(request);
+			} catch (RecordNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidUrlException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InvalidInputException e) {
+				// TODO Auto-generated catch block
+				e.getMessagesHtml(context);
+				e.printStackTrace();
+			}
+		}
 		
 	
 		
