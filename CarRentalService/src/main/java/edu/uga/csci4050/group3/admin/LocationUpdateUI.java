@@ -30,6 +30,8 @@ public class LocationUpdateUI implements Boundary {
 		LocationUpdateControl control = new LocationUpdateControl();
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate updateForm = new SimpleTemplate(context, "LocationUpdateForm.mustache");
+		SimpleTemplate countryList = new SimpleTemplate(context, "CountrySelectInput.mustache");
+		SimpleTemplate stateList = new SimpleTemplate(context, "StateSelectInput.mustache");
 		
 		lr.setTitle("Update location");
 		
@@ -37,6 +39,12 @@ public class LocationUpdateUI implements Boundary {
 		if(new SessionManagement(request, response).requireRole(UserType.ADMIN, CarRentalServlet.getFullURL(context, "/user/home"))){
 			return;
 		}
+		
+		// Prepare form elements (Country/State)
+		countryList.setVariable("name", "locationCountry");
+		updateForm.setVariable("select_country", countryList.render());
+		stateList.setVariable("name", "locationState");
+		updateForm.setVariable("select_state", stateList.render());
 		
 		// Try to load item data
 		try{
