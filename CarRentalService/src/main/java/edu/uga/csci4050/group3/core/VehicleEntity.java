@@ -19,6 +19,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
+import edu.uga.csci4050.group3.db.RecordNotFoundException;
 
 public class VehicleEntity {
 
@@ -212,10 +213,27 @@ public class VehicleEntity {
 		data.put("model", this.model);
 		data.put("make", this.make);
 		data.put("year", String.valueOf(this.year));
-		// TODO: Get the type's actual name from the db not the UID
-		data.put("type", this.type);
-		// TODO: Get the locations's actual name from the db not the UID
-		data.put("location", this.location);
+		
+		// Get the type's actual name from the db not the UID
+		String temp_type;
+		try {
+			temp_type = DatabaseAbstraction.getVehicleType(this.type).getName();
+			data.put("type", temp_type);
+		} catch (RecordNotFoundException e) {
+			// If not found, just ignore
+			data.put("type", this.type);
+		}
+		data.put("type_uid", this.type);
+		
+		// Get the locations's actual name from the db not the UID
+		String temp_location;
+		try {
+			temp_location = DatabaseAbstraction.getLocation(this.location).getName();
+			data.put("location", temp_location);
+		} catch (RecordNotFoundException e) {
+			data.put("location", this.location);
+		}
+		
 		data.put("location_uid", this.location);
 		
 		return data;

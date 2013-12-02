@@ -35,10 +35,6 @@ public class LocationViewUI implements Boundary {
 				view.setVariable("extra_options", menu.render());
 			}
 			
-			//display location first
-			lr.setContent(view.render());
-			lr.render(response);
-			
 			//load card template to display vehicles.
 			SimpleTemplate cardTemplate = new SimpleTemplate(context, "VehicleCard.mustache");
 			// TODO: Load vehicles in the location and display them DONE!
@@ -46,7 +42,6 @@ public class LocationViewUI implements Boundary {
 			List<VehicleEntity> vehicles = vehicleCtrl.getList(request.getParameterMap());
 			String vehiclesHtml = "";
 			if(vehicles.size() > 0){
-				vehiclesHtml += "<div class=\"row pad-top-10\">";
 				for(VehicleEntity vehicle : vehicles){
 					 //compare the UID of vehicle location to UID of location
 					if(vehicle.getLocation().compareTo(loc.getUid()) == 0){
@@ -54,15 +49,13 @@ public class LocationViewUI implements Boundary {
 						vehiclesHtml += cardTemplate.render();
 					}
 				}
-				vehiclesHtml += "</div>";
 			}else{
 				// Show a message for when there aren't any vehicles 
 				vehiclesHtml += "<h4>There aren't vehicles here</h4>";
 			}
-			SimpleTemplate listTemplate = new SimpleTemplate(context, "VehicleList.mustache");
-			listTemplate.setVariable("list", vehiclesHtml);
 			
-			lr.setContent(listTemplate.render());
+			view.setVariable("vehicles", vehiclesHtml);
+			lr.setContent(view.render());
 			lr.render(response);
 			
 			
