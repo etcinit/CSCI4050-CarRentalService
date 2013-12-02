@@ -31,6 +31,7 @@ public class VehicleUpdateUI implements Boundary {
 		VehicleUpdateControl control = new VehicleUpdateControl();
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate updateForm = new SimpleTemplate(context, "VehicleUpdateForm.mustache");
+		lr.setTitle("Vehicle update");
 		
 		lr.setTitle("Update vehicle");
 		

@@ -18,6 +18,7 @@ public class VehicleListUI implements Boundary {
 		VehicleListControl control = new VehicleListControl();
 		
 		LayoutRoot lr = new LayoutRoot(context,request,response);
+		SimpleTemplate listTemplate = new SimpleTemplate(context, "VehicleList.mustache");
 		lr.setTitle("List vehicles");
 		
 		// Tell the control to load the list of vehicles based on the parameters given by the user
@@ -33,7 +34,8 @@ public class VehicleListUI implements Boundary {
 		
 		// Add menu
 		if(isAdmin){
-			vehiclesHtml += adminMenu.render();
+			listTemplate.setVariable("extra_options", adminMenu.render());
+			
 			cardTemplate = new SimpleTemplate(context, "VehicleCardAdmin.mustache");
 		}
 		
@@ -52,7 +54,7 @@ public class VehicleListUI implements Boundary {
 		
 		// Finish the template and display the page
 		
-		SimpleTemplate listTemplate = new SimpleTemplate(context, "VehicleList.mustache");
+		
 		listTemplate.setVariable("list", vehiclesHtml);
 		
 		lr.setContent(listTemplate.render());
