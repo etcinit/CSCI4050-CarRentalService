@@ -88,10 +88,15 @@ public class UserEntity {
 	@NotNull(message = "State should not be empty")
 	String state;
 	
+	@Column(name = "membership_expiration")
+	@NotNull(message = "Membership expiration should not be empty")
+	int membership_expiration;
+	
 	public UserEntity(){
 		this.uid = UUID.randomUUID().toString();
 		setRoleFromEnum(UserType.CUSTOMER);
 		this.first_name = "test";
+		this.membership_expiration = 0;
 	}
 
 	@Column(name = "uid")
@@ -250,8 +255,27 @@ public class UserEntity {
 		this.state = state;
 	}
 	
+	@Column(name = "membership_expiration")
+	public int getMembershipExpiration() {
+		return membership_expiration;
+	}
+	
+	public Date getMembershipExpirationDate(){
+		return DatabaseAbstraction.getDateFromTimestamp(membership_expiration);
+	}
+
+	@Column(name = "membership_expiration")
+	public void setMembershipExpiration(int membership_expiration) {
+		this.membership_expiration = membership_expiration;
+	}
+	
+	public void setMembershipExpirationDate(Date membership_expiration){
+		this.membership_expiration = DatabaseAbstraction.getTimestampFromDate(membership_expiration);
+	}
+	
 	public void loadFromForm(Map<String,String[]> formData) throws InvalidInputException{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		InvalidInputException exception = new InvalidInputException();
 		
 		if(formData.containsKey("userUsername")){
@@ -311,6 +335,15 @@ public class UserEntity {
 			setState(formData.get("userState")[0]);
 		}
 		
+		if(formData.containsKey("userMembershipExpiration")){
+			try{
+				setDateofbirthDate(sdftime.parse(formData.get("userMembershipExpiration")[0]));
+			}
+			catch(ParseException e){
+				exception.addMessage("Invalid date format for membership expiration");
+			}
+		}
+		
 		// Throw exception if one or more conditions fail
 		if(exception.countMessages() > 0){
 			throw exception;
@@ -332,6 +365,7 @@ public class UserEntity {
 	public Map<String, String> getData(){
 		Map<String, String> data = new HashMap<String, String>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		
 		data.put("uid",this.uid);
 		data.put("username",this.username);
@@ -345,6 +379,7 @@ public class UserEntity {
 		data.put("role", getRoleEnum().toString());
 		data.put("dateofbirth",sdf.format(this.dateofbirth));
 		data.put("zipcode", String.valueOf(this.zipcode));
+		data.put("membership_expiration", sdftime.format(this.membership_expiration));
 		
 		return data;
 	}

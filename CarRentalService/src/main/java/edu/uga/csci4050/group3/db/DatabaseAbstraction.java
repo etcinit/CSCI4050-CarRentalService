@@ -408,6 +408,7 @@ public class DatabaseAbstraction {
 						"country VARCHAR(255), " +
 						"zipcode INT, " +
 						"city VARCHAR(255), " +
+						"membership_expiration INT, " +
 						"PRIMARY KEY( id ))");
 		
 		create.execute("CREATE TABLE IF NOT EXISTS PAYMENT_TRANSACTION " +
