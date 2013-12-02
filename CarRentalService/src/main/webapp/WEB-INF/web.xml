@@ -39,7 +39,7 @@
   	<url-pattern>/vehicletype/update/*</url-pattern>
   	
   	<url-pattern>/locations</url-pattern>
-  	<url-pattern>/locations/filterLocations</url-pattern>
+  	<url-pattern>/locations/filter</url-pattern>
   	<url-pattern>/location</url-pattern>
   	<url-pattern>/location/create</url-pattern>
   	<url-pattern>/location/delete/*</url-pattern>
