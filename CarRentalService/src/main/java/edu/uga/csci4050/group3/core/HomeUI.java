@@ -19,6 +19,7 @@ public class HomeUI implements Boundary {
 		LayoutRoot lr = new LayoutRoot(context,request,response);
 		SimpleTemplate hometp = new SimpleTemplate(context, "Home.mustache");
 		
+		lr.setTitle("ShareCar");
 		lr.setContent(hometp.render());
 		lr.render(response);
 	}

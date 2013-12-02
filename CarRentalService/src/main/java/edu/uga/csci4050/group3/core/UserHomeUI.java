@@ -39,14 +39,8 @@ public class UserHomeUI implements Boundary{
 			try {
 				response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/login"));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//response.setHeader("Location", CarRentalServlet.getFullURL(context, "/user/login"));
-		
 		}
-		
-		
 	}
-
 }

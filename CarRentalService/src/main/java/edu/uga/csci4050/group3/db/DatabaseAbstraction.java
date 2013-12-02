@@ -20,20 +20,15 @@ import edu.uga.csci4050.group3.core.UserType;
 import edu.uga.csci4050.group3.core.VehicleEntity;
 import edu.uga.csci4050.group3.core.VehicleTypeEntity;
 import static org.jooq.impl.DSL.*;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.*;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.PaymentTransactionRecord;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalLocationRecord;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.RentalTransactionRecord;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.UserRecord;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleRecord;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.records.VehicleTypeRecord;
+import edu.uga.csci4050.group3.jooq.team3.tables.*;
+import edu.uga.csci4050.group3.jooq.team3.tables.records.*;
 
 public class DatabaseAbstraction {
 	
-	private static final String USERNAME = "group3";
-	private static final String PASSWORD = "group3";
+	private static final String USERNAME = "team3";
+	private static final String PASSWORD = "dpatterns";
 	private static final String HOSTNAME = "localhost";
-	private static final String DATABASE = "rentalservice";
+	private static final String DATABASE = "team3";
 	private static final int PORT = 3306;
 
 	public static Connection getConnection(){
@@ -413,6 +408,7 @@ public class DatabaseAbstraction {
 						"country VARCHAR(255), " +
 						"zipcode INT, " +
 						"city VARCHAR(255), " +
+						"membership_expiration INT, " +
 						"PRIMARY KEY( id ))");
 		
 		create.execute("CREATE TABLE IF NOT EXISTS PAYMENT_TRANSACTION " +

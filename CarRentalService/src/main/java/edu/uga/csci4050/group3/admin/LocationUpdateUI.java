@@ -30,6 +30,8 @@ public class LocationUpdateUI implements Boundary {
 		LocationUpdateControl control = new LocationUpdateControl();
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate updateForm = new SimpleTemplate(context, "LocationUpdateForm.mustache");
+		SimpleTemplate countryList = new SimpleTemplate(context, "CountrySelectInput.mustache");
+		SimpleTemplate stateList = new SimpleTemplate(context, "StateSelectInput.mustache");
 		
 		lr.setTitle("Update location");
 		
@@ -38,10 +40,18 @@ public class LocationUpdateUI implements Boundary {
 			return;
 		}
 		
+		// Prepare form elements (Country/State)
+		countryList.setVariable("name", "locationCountry");
+		updateForm.setVariable("select_country", countryList.render());
+		stateList.setVariable("name", "locationState");
+		updateForm.setVariable("select_state", stateList.render());
+		
 		// Try to load item data
 		try{
 			LocationEntity location = control.getLocation(request);
 			updateForm.setVariables(location.getData());
+			updateForm.setVariable("select_country", countryList.render());
+			updateForm.setVariable("select_state", stateList.render());
 		}
 		catch(RecordNotFoundException ex){
 			lr.setContent(new Alert(context,"Location with UID not found").render());

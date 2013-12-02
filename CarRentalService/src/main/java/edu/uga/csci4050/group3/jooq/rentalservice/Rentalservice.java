@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.rentalservice;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Rentalservice extends org.jooq.impl.SchemaImpl {
 
-	private static final long serialVersionUID = -2128018062;
+	private static final long serialVersionUID = -443856081;
 
 	/**
 	 * The singleton instance of <code>rentalservice</code>
@@ -23,22 +23,5 @@ public class Rentalservice extends org.jooq.impl.SchemaImpl {
 	 */
 	private Rentalservice() {
 		super("rentalservice");
-	}
-
-	@Override
-	public final java.util.List<org.jooq.Table<?>> getTables() {
-		java.util.List result = new java.util.ArrayList();
-		result.addAll(getTables0());
-		return result;
-	}
-
-	private final java.util.List<org.jooq.Table<?>> getTables0() {
-		return java.util.Arrays.<org.jooq.Table<?>>asList(
-			edu.uga.csci4050.group3.jooq.rentalservice.tables.PaymentTransaction.PAYMENT_TRANSACTION,
-			edu.uga.csci4050.group3.jooq.rentalservice.tables.RentalLocation.RENTAL_LOCATION,
-			edu.uga.csci4050.group3.jooq.rentalservice.tables.RentalTransaction.RENTAL_TRANSACTION,
-			edu.uga.csci4050.group3.jooq.rentalservice.tables.User.USER,
-			edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle.VEHICLE,
-			edu.uga.csci4050.group3.jooq.rentalservice.tables.VehicleType.VEHICLE_TYPE);
 	}
 }

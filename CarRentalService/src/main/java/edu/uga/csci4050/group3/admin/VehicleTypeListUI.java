@@ -23,6 +23,7 @@ public class VehicleTypeListUI implements Boundary {
 			RequestType type) {
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate list = new SimpleTemplate(context, "VehicleTypeList.mustache");
+		lr.setTitle("Vehicle types");
 		
 		// Check if the user is authorized
 		if(new SessionManagement(request, response).requireRole(UserType.ADMIN, CarRentalServlet.getFullURL(context, "/user/home"))){

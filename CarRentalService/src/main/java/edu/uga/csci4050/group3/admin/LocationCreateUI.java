@@ -25,12 +25,20 @@ public class LocationCreateUI implements Boundary {
 
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate createForm = new SimpleTemplate(context, "LocationCreateForm.mustache");
+		SimpleTemplate countryList = new SimpleTemplate(context, "CountrySelectInput.mustache");
+		SimpleTemplate stateList = new SimpleTemplate(context, "StateSelectInput.mustache");
 		LocationCreateControl control = new LocationCreateControl();
 		
 		// Check if the user is authorized
 		if(new SessionManagement(request, response).requireRole(UserType.ADMIN, CarRentalServlet.getFullURL(context, "/user/home"))){
 			return;
 		}
+		
+		// Prepare form elements (Country/State)
+		countryList.setVariable("name", "locationCountry");
+		createForm.setVariable("select_country", countryList.render());
+		stateList.setVariable("name", "locationState");
+		createForm.setVariable("select_state", stateList.render());
 		
 		if(type == RequestType.POST){
 			try {
