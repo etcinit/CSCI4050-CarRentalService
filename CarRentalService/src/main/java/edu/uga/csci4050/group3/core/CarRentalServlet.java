@@ -110,6 +110,8 @@ public class CarRentalServlet extends HttpServlet {
 			new UserRegisterUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/home")){
 			new UserHomeUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/user/account")){
+			new UserAccountUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/delete")){
 			new CancelAccountUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/login")){
