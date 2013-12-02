@@ -5,7 +5,7 @@
 ******************************************************************************/
 jQuery(document).ready(function() {
 	$('.carousel').css({'margin': 0, 'width': $(window).outerWidth(), 'height': $(window).outerHeight() - 50});
-	$('.carousel-inner').css({'z-index': -1});
+	$('.carousel-inner').css({'z-index': 10});
 	$('.carousel .item').css({'position': 'fixed', 'width': '100%', 'height': '100%'});
 	$('.carousel-inner div.item img').each(function() {
 		var imgSrc = $(this).attr('src');
