@@ -154,7 +154,7 @@
       <name>org.jooq.util.DefaultGenerator</name>
       <database>
         <name>org.jooq.util.mysql.MySQLDatabase</name>
-        <includes>rentalservice.*</includes>
+        <includes>team3.*</includes>
         <excludes></excludes>
         <inputSchema></inputSchema>
       </database>
