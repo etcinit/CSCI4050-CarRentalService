@@ -24,6 +24,7 @@
   	<url-pattern>/user/login</url-pattern>
   	<url-pattern>/user/logout</url-pattern>
   	<url-pattern>/user/home</url-pattern>
+  	<url-pattern>/user/account</url-pattern>
   	<url-pattern>/user/updaterole</url-pattern>
   	<url-pattern>/user/delete</url-pattern>
   	
