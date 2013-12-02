@@ -26,7 +26,7 @@ import edu.uga.csci4050.group3.admin.VehicleUpdateUI;
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
-import edu.uga.csci4050.group3.customer.RentalLocationsUI;
+import edu.uga.csci4050.group3.customer.LocationFilterUI;
 
 /**
  * Servlet implementation class CarRentalServlet
@@ -84,8 +84,8 @@ public class CarRentalServlet extends HttpServlet {
 			new VehicleTypeDeleteUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/locations")){
 			new LocationListUI().handleRequest(request, response, context, type);
-		}else if(uriMatches(request, "/locations/filterLocations")){
-			new RentalLocationsUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/locations/filter")){
+			new LocationFilterUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/location")){
 			new LocationViewUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/location/create")){
