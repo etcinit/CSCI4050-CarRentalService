@@ -32,6 +32,7 @@ public class LocationListUI implements Boundary {
 			
 			String userLocation = request.getParameter("state");
 			
+			//the following code is now in RentalLocationsUI in the customer package.
 			/*if(userLocation.compareTo("") != 0){
 				List<LocationEntity> locations = control.getList();
 				
