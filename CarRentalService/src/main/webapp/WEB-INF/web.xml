@@ -49,6 +49,7 @@
   	<url-pattern>/location/delete/*</url-pattern>
   	<url-pattern>/location/update/*</url-pattern>
   	
+  	<url-pattern>/rent</url-pattern>
   	<url-pattern>/rentals</url-pattern>
   	<url-pattern>/rental/cancel</url-pattern>
   	

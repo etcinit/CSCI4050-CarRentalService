@@ -29,6 +29,7 @@ import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 import edu.uga.csci4050.group3.customer.LocationFilterUI;
 import edu.uga.csci4050.group3.customer.MembershipPurchaseForm;
+import edu.uga.csci4050.group3.customer.CreateRentalUI;
 import edu.uga.csci4050.group3.customer.MembershipUI;
 
 /**
@@ -97,6 +98,8 @@ public class CarRentalServlet extends HttpServlet {
 			new LocationUpdateUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/location/delete")){
 			new LocationDeleteUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/rent")){
+			new CreateRentalUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/rentals")){
 			new RentalListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/rental/cancel")){
