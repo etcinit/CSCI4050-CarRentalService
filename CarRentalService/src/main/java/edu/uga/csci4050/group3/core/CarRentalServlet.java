@@ -28,6 +28,7 @@ import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 import edu.uga.csci4050.group3.customer.LocationFilterUI;
+import edu.uga.csci4050.group3.customer.MembershipPurchaseForm;
 import edu.uga.csci4050.group3.customer.CreateRentalUI;
 import edu.uga.csci4050.group3.customer.MembershipUI;
 
@@ -125,6 +126,8 @@ public class CarRentalServlet extends HttpServlet {
 			DatabaseAbstraction.destroyDatabase();
 		}else if(uriMatches(request, "/membership")){
 			new MembershipUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/membership/purchase")){
+			new MembershipPurchaseForm().handleRequest(request, response, context, type);
 		}else{
 			// Basic page for debugging URLs
 			LayoutRoot lr = new LayoutRoot(getServletContext(),request,response);

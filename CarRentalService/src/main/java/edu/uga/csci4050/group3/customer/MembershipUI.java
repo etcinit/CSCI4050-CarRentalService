@@ -28,8 +28,10 @@ public class MembershipUI implements Boundary {
 		MembershipControl control = new MembershipControl();
 		if(!control.customerHasMembership(request, response)){ // Customer doesn't have a membership
 			membershipLayout.setVariable("message", "<h4>You don't have a membership with us yet. Would you like to get one?</h4>");
+			membershipLayout.setVariable("type", "Purchase");
 		}else{ // They already have a membership, prompt to extend
 			membershipLayout.setVariable("message", "<h4>You already have a membership. Would you like to extend it?</h4>");
+			membershipLayout.setVariable("type", "Extend");
 		}
 		lr.setContent(membershipLayout.render());
 		lr.render(response);
