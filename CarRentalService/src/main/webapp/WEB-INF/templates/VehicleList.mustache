@@ -1,2 +1,21 @@
-<h1>List all vehicles</h1>
-<div class="row"><div class="col-md-12">{{{list}}}</div></div>
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>All available vehicles</h1>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<ul class="nav nav-pills">
+		  <li class="active"><a href="#">List&nbsp;<span class="glyphicon glyphicon-list"></span></a></li>
+		  <li><a href="{{base_url}}/locations">View locations&nbsp;<span class="glyphicon glyphicon-map-marker"></span></a></li>
+		  {{{extra_options}}}
+		</ul>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		{{{list}}}
+	</div>
+</div>
