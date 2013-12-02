@@ -22,6 +22,12 @@ public class UserLogoutUI implements Boundary {
 		ulc.logout(request, response);
 		
 		response.addHeader("Location", CarRentalServlet.getFullURL(context, "/home"));
+		
+		try {
+			response.sendRedirect(CarRentalServlet.getFullURL(context, "/"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
