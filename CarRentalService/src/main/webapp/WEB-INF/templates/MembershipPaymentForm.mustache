@@ -1,0 +1,15 @@
+
+      <form class="form-signin" method="post">
+        <h2 class="form-signin-heading">Six months of membership is currently ${{price}}.</h2>
+        <div>{{{alert}}}</div>
+        <div class="form-group">
+        	<input type="text" class="form-control" name="creditCard" placeholder="Credit Card Number" required autofocus>
+        </div>
+        <div class="form-group">
+        	<input type="password" class="form-control" name="securityKey" placeholder="Security Key" required>
+        </div>
+        <div class="form-group">
+      	 	<a class="btn btn-lg btn-default" href="{{base_url}}/user/home">Home</a>
+        	<button class="btn btn-lg btn-success" type="submit">Purchase</button>
+        </div>
+      </form>
