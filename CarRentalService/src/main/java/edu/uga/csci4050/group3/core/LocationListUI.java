@@ -18,6 +18,9 @@ public class LocationListUI implements Boundary {
 		
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate list = new SimpleTemplate(context, "LocationList.mustache");
+		SimpleTemplate countryList = new SimpleTemplate(context, "CountrySelectInput.mustache");
+		SimpleTemplate stateList = new SimpleTemplate(context, "StateSelectInput.mustache");
+		SimpleTemplate filterForm = new SimpleTemplate(context, "CustomerLocationEntry.mustache");
 		LocationListControl control = new LocationListControl();
 		lr.setTitle("Locations");
 		
@@ -25,31 +28,28 @@ public class LocationListUI implements Boundary {
 		boolean isAdmin = control.isAdmin(request, response);
 		if(isAdmin){
 			SimpleTemplate menu = new SimpleTemplate(context, "LocationListAdminMenu.mustache");
-			list.setVariable("extra_options", menu.render());
+			
+			String extraOptions = "";
+			
+			// Add admin menu
+			extraOptions += menu.render();
+			
+			// Prepare form elements (Country/State)
+			countryList.setVariable("name", "country");
+			filterForm.setVariable("select_country", countryList.render());
+			stateList.setVariable("name", "state");
+			filterForm.setVariable("select_state", stateList.render());
+			extraOptions += filterForm.render();
+			
+			list.setVariable("extra_options", extraOptions);
 		}else{//if customer, display entry form to filter by state
-			SimpleTemplate zipCode = new SimpleTemplate(context, "CustomerLocationEntry.mustache");
-			list.setVariable("extra_options", zipCode.render());
 			
-			String userLocation = request.getParameter("state");
-			
-			//the following code is now in RentalLocationsUI in the customer package.
-			/*if(userLocation.compareTo("") != 0){
-				List<LocationEntity> locations = control.getList();
-				
-				if(locations.size() > 0){
-					String locationsHtml = "";
-					for(LocationEntity loc : locations){
-						SimpleTemplate locRow = new SimpleTemplate(context, "LocationRow.mustache");
-						if(loc.getState().compareTo(userLocation) == 0){
-						locRow.setVariables(loc.getData());
-						locationsHtml += locRow.render();
-						}
-					}
-					list.setVariable("locations", locationsHtml);
-				}else{
-					list.setVariable("message", "<h4>No locations found</h4>");
-				}
-			}*/
+			// Prepare form elements (Country/State)
+			countryList.setVariable("name", "country");
+			filterForm.setVariable("select_country", countryList.render());
+			stateList.setVariable("name", "state");
+			filterForm.setVariable("select_state", stateList.render());
+			list.setVariable("extra_options", filterForm.render());
 		}
 		
 		

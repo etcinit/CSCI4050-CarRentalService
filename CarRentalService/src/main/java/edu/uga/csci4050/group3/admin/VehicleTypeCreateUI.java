@@ -25,6 +25,7 @@ public class VehicleTypeCreateUI implements Boundary {
 		VehicleTypeCreateControl control = new VehicleTypeCreateControl();
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate createForm = new SimpleTemplate(context, "VehicleTypeCreateForm.mustache");
+		lr.setTitle("Define new vehicle type");
 		
 		// Check if the user is authorized
 		if(new SessionManagement(request, response).requireRole(UserType.ADMIN, CarRentalServlet.getFullURL(context, "/user/home"))){

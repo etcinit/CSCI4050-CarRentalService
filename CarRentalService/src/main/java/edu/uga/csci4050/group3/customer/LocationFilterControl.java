@@ -20,6 +20,20 @@ public class LocationFilterControl {
 			 for(LocationEntity loc : list){
 				 boolean matches = true;
 				 
+				// Check if country matches (if provided)
+				 if(request.getParameterMap().containsKey("country") && request.getParameter("country") != ""){
+					 if(!loc.getCountry().equals(request.getParameter("country"))){
+						 matches = false;
+					 }
+				 }
+				 
+				// Check if city matches (if provided)
+				 if(request.getParameterMap().containsKey("city") && request.getParameter("city") != ""){
+					 if(!loc.getCity().equals(request.getParameter("city"))){
+						 matches = false;
+					 }
+				 }
+				 
 				 // Check if state matches (if provided)
 				 if(request.getParameterMap().containsKey("state") && request.getParameter("state") != ""){
 					 if(!loc.getState().equals(request.getParameter("state"))){

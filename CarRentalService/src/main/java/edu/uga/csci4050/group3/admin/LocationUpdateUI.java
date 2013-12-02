@@ -50,6 +50,8 @@ public class LocationUpdateUI implements Boundary {
 		try{
 			LocationEntity location = control.getLocation(request);
 			updateForm.setVariables(location.getData());
+			updateForm.setVariable("select_country", countryList.render());
+			updateForm.setVariable("select_state", stateList.render());
 		}
 		catch(RecordNotFoundException ex){
 			lr.setContent(new Alert(context,"Location with UID not found").render());

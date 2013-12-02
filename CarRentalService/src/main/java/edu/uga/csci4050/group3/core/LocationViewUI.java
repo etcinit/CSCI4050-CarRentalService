@@ -20,6 +20,7 @@ public class LocationViewUI implements Boundary {
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate view = new SimpleTemplate(context, "LocationView.mustache");
 		LocationViewControl control = new LocationViewControl();
+		lr.setTitle("Location details");
 		
 		// Try to find location
 		try {
