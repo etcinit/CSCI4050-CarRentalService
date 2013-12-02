@@ -36,7 +36,7 @@ public class CancelAccountUI implements Boundary {
 				lr.setContent(cancelLayout.render());
 				lr.render(response);
 			}
-		}else{
+		} else {
 			try {
 				response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/login"));
 			} catch (IOException e) {

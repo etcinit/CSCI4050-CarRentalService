@@ -16,6 +16,12 @@ import edu.uga.csci4050.group3.db.SessionManagement;
 import edu.uga.csci4050.group3.db.Settings;
 
 public class MembershipPaymentControl {
+	
+	public boolean isLoggedIn(HttpServletRequest request, HttpServletResponse response){
+		SessionManagement sessMan = new SessionManagement(request, response);
+		
+		return sessMan.isUserLoggedIn();
+	}
 	public void authenticate(HttpServletRequest request, HttpServletResponse response) throws InvalidInputException {
 		// Get payment info from form
 		Map<String,String[]> params = request.getParameterMap();
