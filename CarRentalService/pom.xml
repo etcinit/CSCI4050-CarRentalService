@@ -145,8 +145,8 @@
     <jdbc>
       <driver>com.mysql.jdbc.Driver</driver>
       <url>jdbc:mysql://localhost:3306/rentalservice</url>
-      <user>group3</user>
-      <password>group3</password>
+      <user>team3</user>
+      <password>dpatterns</password>
     </jdbc>
 
     <!-- Generator parameters -->

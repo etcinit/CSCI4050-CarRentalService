@@ -11,7 +11,7 @@ package edu.uga.csci4050.group3.jooq.team3.tables;
 @java.lang.SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class User extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.team3.tables.records.UserRecord> {
 
-	private static final long serialVersionUID = 1882893795;
+	private static final long serialVersionUID = -612563568;
 
 	/**
 	 * The singleton instance of <code>team3.USER</code>
@@ -100,6 +100,11 @@ public class User extends org.jooq.impl.TableImpl<edu.uga.csci4050.group3.jooq.t
 	 * The column <code>team3.USER.city</code>. 
 	 */
 	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.team3.tables.records.UserRecord, java.lang.String> CITY = createField("city", org.jooq.impl.SQLDataType.VARCHAR.length(255), this);
+
+	/**
+	 * The column <code>team3.USER.membership_expiration</code>. 
+	 */
+	public final org.jooq.TableField<edu.uga.csci4050.group3.jooq.team3.tables.records.UserRecord, java.lang.Integer> MEMBERSHIP_EXPIRATION = createField("membership_expiration", org.jooq.impl.SQLDataType.INTEGER, this);
 
 	/**
 	 * Create a <code>team3.USER</code> table reference
