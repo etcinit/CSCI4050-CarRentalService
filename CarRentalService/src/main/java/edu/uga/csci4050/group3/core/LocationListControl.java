@@ -39,4 +39,22 @@ public class LocationListControl {
 			return false;
 		}
 	}
+	
+	public boolean isCustomer(HttpServletRequest request, HttpServletResponse response){
+		SessionManagement sessMan = new SessionManagement(request, response);
+		
+		if(sessMan.isUserLoggedIn()){
+			try {
+				if(sessMan.getUserRole() == UserType.CUSTOMER){
+					return true;
+				}else{
+					return false;
+				}
+			} catch (SessionException e) {
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
 }
