@@ -383,4 +383,5 @@ public class UserEntity {
 		
 		return data;
 	}
+
 }
