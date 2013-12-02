@@ -476,7 +476,7 @@ public class DatabaseAbstraction {
 		admin.setFirst_name("admin");
 		admin.setLast_name("admin");
 		admin.setStreet_Address("Broad St");
-		admin.setEmail("email@email.com");
+		admin.setEmail("admin@email.com");
 		admin.setCity("Athens");
 		admin.setCountry("USA");
 		admin.setState("Georgia");
@@ -486,6 +486,24 @@ public class DatabaseAbstraction {
 		admin.setZipcode(30000);
 		
 		putUser(admin);
+		
+		// Create an customer user
+		UserEntity customer = new UserEntity();
+		customer.setUsername("customer");
+		customer.setPassword("customer");
+		customer.setFirst_name("customer");
+		customer.setLast_name("customer");
+		customer.setStreet_Address("Broad St");
+		customer.setEmail("customer@email.com");
+		customer.setCity("Athens");
+		customer.setCountry("USA");
+		customer.setState("Georgia");
+		customer.setDateofbirth(0);
+		customer.setRoleFromEnum(UserType.CUSTOMER);
+		customer.setLicense("0000-0001");
+		customer.setZipcode(30000);
+				
+		putUser(customer);
 		}
 		catch(Exception e){
 			e.printStackTrace();
