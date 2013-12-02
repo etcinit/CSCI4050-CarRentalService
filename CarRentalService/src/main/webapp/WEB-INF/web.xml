@@ -27,6 +27,8 @@
   	<url-pattern>/user/updaterole</url-pattern>
   	<url-pattern>/user/delete</url-pattern>
   	
+  	<url-pattern>/membership</url-pattern>
+  	
   	<url-pattern>/vehicles</url-pattern>
   	<url-pattern>/vehicle/*</url-pattern>
   	<url-pattern>/vehicle/create</url-pattern>
