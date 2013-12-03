@@ -56,7 +56,8 @@ public class ReservationReturnControl {
 		// Calculate additional charges
 		
 		// If we are still in the rental period, there shouldn't be any
-		if(rental.getEnd_date() >= DatabaseAbstraction.getTimestampFromDate(new Date())){
+		if(rental.getEnd_date() >= DatabaseAbstraction.getTimestampFromDate(new Date()) && 
+				rental.getStart_date() <= DatabaseAbstraction.getTimestampFromDate(new Date())){
 			return 0.0;
 		}
 		
@@ -68,15 +69,17 @@ public class ReservationReturnControl {
 		Date current_time = new Date();
 		long difference = current_time.getTime() - rental.getEnd_dateDate().getTime();
 		
-		if(TimeUnit.MILLISECONDS.toDays(difference) > 0){
-			// User is more than one day away, charge daily rate
-			int daysToCharge = (int)Math.ceil(TimeUnit.MILLISECONDS.toDays(difference));
-			return vtype.getDaily_rate() * (double)daysToCharge;
-		}else{
-			// User is only off by a few hours
-			int hoursToCharge = (int)Math.ceil(TimeUnit.MILLISECONDS.toHours(difference));
-			return vtype.getHourly_rate() * (double)hoursToCharge;
+		if(rental.getStart_date() > DatabaseAbstraction.getTimestampFromDate(new Date())) { // Returning before start date, but in the 1 hour grace period
+			return vtype.getHourly_rate();
 		}
+		
+		if(difference > 0) {
+			// User is returning past return end date
+			int hoursToCharge = (int)Math.ceil(TimeUnit.MILLISECONDS.toHours(difference));
+			return (vtype.getHourly_rate() * (double)hoursToCharge) + 50.0;
+		}
+		
+		return 0.0;
 	}
 	
 	public void processReturn(HttpServletRequest request) throws InvalidUrlException, InvalidInputException, RecordNotFoundException{

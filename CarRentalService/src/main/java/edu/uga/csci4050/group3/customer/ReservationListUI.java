@@ -1,6 +1,7 @@
 package edu.uga.csci4050.group3.customer;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class ReservationListUI implements Boundary {
 		LayoutRoot lr = new LayoutRoot(context, request, response);
 		SimpleTemplate list = new SimpleTemplate(context, "ReservationList.mustache");
 		ReservationListControl control = new ReservationListControl();
+		Calendar cal = Calendar.getInstance();
 		lr.setTitle("Reservations");
 		
 		// Check if the user is authorized
@@ -58,8 +60,11 @@ public class ReservationListUI implements Boundary {
 			if(tlist.size() > 0){
 				String locationsHtml = "";
 				for(RentalTransactionEntity rental : tlist){
+					// Move time back an hour for checking
+					cal.setTime(rental.getStart_dateDate());
+					cal.add(Calendar.HOUR, -1);
 					// Load the right template depending on whether the user can cancel or return
-					if(rental.getStart_date() > DatabaseAbstraction.getTimestampFromDate(new Date())){
+					if(DatabaseAbstraction.getTimestampFromDate(cal.getTime()) > DatabaseAbstraction.getTimestampFromDate(new Date())){
 						// Also check that it hasn't been already cancelled
 						if(rental.getStatusEnum() == RentalStatus.CANCELLED){
 							SimpleTemplate rentalRow = new SimpleTemplate(context, "ReservationRowStatic.mustache");
