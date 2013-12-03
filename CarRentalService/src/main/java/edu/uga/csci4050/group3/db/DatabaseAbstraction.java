@@ -534,6 +534,29 @@ public class DatabaseAbstraction {
 		customer.setZipcode(30000);
 				
 		putUser(customer);
+		
+		LocationEntity location1 = new LocationEntity();
+		location1.setName("Downtown Athens");
+		location1.setStreet_address("23 East Broad St");
+		location1.setCity("AThens");
+		location1.setState("GA");
+		location1.setCountry("US");
+		location1.setZipcode(30605);
+		location1.setCapacity(35);
+		
+		putLocation(location1);
+		
+		LocationEntity location2 = new LocationEntity();
+		location2.setName("Eastside Athens");
+		location2.setStreet_address("278 Lexington Rd");
+		location2.setCity("AThens");
+		location2.setState("GA");
+		location2.setCountry("US");
+		location2.setZipcode(30607);
+		location2.setCapacity(42);
+		
+		putLocation(location2);
+		
 		}
 		catch(Exception e){
 			e.printStackTrace();
