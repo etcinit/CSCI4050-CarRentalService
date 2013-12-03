@@ -18,6 +18,8 @@ import edu.uga.csci4050.group3.db.RecordNotFoundException;
 import edu.uga.csci4050.group3.db.SessionManagement;
 import edu.uga.csci4050.group3.template.Alert;
 import edu.uga.csci4050.group3.template.LayoutRoot;
+import edu.uga.csci4050.group3.template.SelectForm;
+import edu.uga.csci4050.group3.template.SelectFormType;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 
 public class LocationUpdateUI implements Boundary {
@@ -40,18 +42,23 @@ public class LocationUpdateUI implements Boundary {
 			return;
 		}
 		
-		// Prepare form elements (Country/State)
-		countryList.setVariable("name", "locationCountry");
-		updateForm.setVariable("select_country", countryList.render());
-		stateList.setVariable("name", "locationState");
-		updateForm.setVariable("select_state", stateList.render());
+		
 		
 		// Try to load item data
 		try{
 			LocationEntity location = control.getLocation(request);
 			updateForm.setVariables(location.getData());
-			updateForm.setVariable("select_country", countryList.render());
-			updateForm.setVariable("select_state", stateList.render());
+			
+			// Prepare form elements (Country/State)
+			SelectForm countryForm = new SelectForm(context, SelectFormType.COUNTRY);
+			countryForm.setPreselectedOption(location.getCountry(), location.getCountry());
+			countryForm.setName("locationCountry");
+			SelectForm stateForm = new SelectForm(context, SelectFormType.STATE);
+			stateForm.setPreselectedOption(location.getState(), location.getState());
+			stateForm.setName("locationState");
+			
+			updateForm.setVariable("select_country", countryForm.render());
+			updateForm.setVariable("select_state", stateForm.render());
 		}
 		catch(RecordNotFoundException ex){
 			lr.setContent(new Alert(context,"Location with UID not found").render());

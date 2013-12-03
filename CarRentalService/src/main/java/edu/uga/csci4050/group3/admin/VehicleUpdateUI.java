@@ -16,7 +16,6 @@ import edu.uga.csci4050.group3.core.VehicleEntity;
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.db.RecordNotFoundException;
 import edu.uga.csci4050.group3.db.SessionManagement;
-import edu.uga.csci4050.group3.jooq.rentalservice.tables.Vehicle;
 import edu.uga.csci4050.group3.template.Alert;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
