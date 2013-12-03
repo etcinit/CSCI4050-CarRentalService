@@ -1,24 +1,28 @@
 # Car Rental Service Project
 
+This is a car rental service we implemented for one of our classes. 
+This is a web application coded in Java running on a JBoss server.
+
+__Group members:__
+
+- Jonathan Bright
+- Ross Freeman (refreeman13)
+- Justin Hromalik (Hromalik)
+- Eduardo Trujillo (eduard44)
+
 ## Installation
 
 You will need Maven and a JBoss 7.1.1 server in order to run this project.
 This application also makes use of a MySQL database although you could probably
 reconfigure it so that it uses another JDBC compatible database
 
-1. Open a terminal on the project's directory
+1. Open a terminal on the project's directory: `cd CarRentalService`
 
-`cd CarRentalService`
-
-2. Compile the project
-
-`mvn package`
+2. Compile the project: `mvn package`
 
 3. Launch a properly configured JBoss server
 
-4. Deploy using Maven
-
-`mvn jboss-as:deploy`
+4. Deploy using Maven: `mvn jboss-as:deploy`
  
 ## Setup
 
@@ -29,16 +33,16 @@ the JBoss server
 
 Launch the MySQL client `mysql` and run the following queries:
 
-```sql
-CREATE USER 'team3'@'localhost' IDENTIFIED BY 'dpatterns';
-CREATE DATABASE team3;
-GRANT ALL PRIVILEGES ON team3.* TO 'team3'@'localhost';
-FLUSH PRIVILEGES;
-```
+	```sql
+	CREATE USER 'team3'@'localhost' IDENTIFIED BY 'dpatterns';
+	CREATE DATABASE team3;
+	GRANT ALL PRIVILEGES ON team3.* TO 'team3'@'localhost';
+	FLUSH PRIVILEGES;
+	```
 
 2. Use the database setup script by using a browser
 
-Go to `http://localhost:8080/CarRentalService/database/setup`
+	Go to `http://localhost:8080/CarRentalService/database/setup`
 
 ## Usage
 
