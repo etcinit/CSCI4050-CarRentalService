@@ -20,14 +20,18 @@ public class CreateRentalControl {
 		if(!request.getParameterMap().containsKey("uid")){
 			throw new InvalidUrlException();
 		}
-		
 		// Attempt to get the vehicle
 		VehicleEntity veh = DatabaseAbstraction.getVehicle(request.getParameter("uid"));
 		
 		return veh;
 	}
 	
+	
+	
 	public boolean checkReservationDates(HttpServletRequest request) throws RecordNotFoundException, InvalidUrlException, InvalidInputException{
+		
+		Date start_date = new Date();
+		Date end_date = new Date();
 		
 		// Check that we have a UID
 		if(!request.getParameterMap().containsKey("uid")){
@@ -47,9 +51,15 @@ public class CreateRentalControl {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		
 		try {
-			Date start_date = sdf.parse(request.getParameter("start_date"));
+			start_date = sdf.parse(request.getParameter("start_date"));
 		} catch (ParseException e) {
 			invalidEx.addMessage("Invalid start date format");
+		}
+		
+		try {
+			end_date = sdf.parse(request.getParameter("end_date"));
+		} catch (ParseException e) {
+			invalidEx.addMessage("Invalid end date format");
 		}
 		
 		if(invalidEx.countMessages() > 0){
