@@ -538,7 +538,7 @@ public class DatabaseAbstraction {
 		LocationEntity location1 = new LocationEntity();
 		location1.setName("Downtown Athens");
 		location1.setStreet_address("23 East Broad St");
-		location1.setCity("AThens");
+		location1.setCity("Athens");
 		location1.setState("GA");
 		location1.setCountry("US");
 		location1.setZipcode(30605);
@@ -549,13 +549,57 @@ public class DatabaseAbstraction {
 		LocationEntity location2 = new LocationEntity();
 		location2.setName("Eastside Athens");
 		location2.setStreet_address("278 Lexington Rd");
-		location2.setCity("AThens");
+		location2.setCity("Athens");
 		location2.setState("GA");
 		location2.setCountry("US");
 		location2.setZipcode(30607);
 		location2.setCapacity(42);
 		
 		putLocation(location2);
+		
+		LocationEntity location3 = new LocationEntity();
+		location3.setName("North Charleston");
+		location2.setStreet_address("13 East Bay St");
+		location2.setCity("Charleston");
+		location2.setState("SC");
+		location2.setCountry("US");
+		location2.setZipcode(29464);
+		location2.setCapacity(80);
+		
+		putLocation(location3);
+		
+		LocationEntity location4 = new LocationEntity();
+		location4.setName("Downtown Nashville");
+		location4.setStreet_address("45 Main St");
+		location4.setCity("Nashville");
+		location4.setState("TN");
+		location4.setCountry("US");
+		location4.setZipcode(47621);
+		location4.setCapacity(53);
+		
+		putLocation(location4);
+		
+		
+		VehicleTypeEntity regular = new VehicleTypeEntity();
+		regular.setDaily_rate(110.00);
+		regular.setHourly_rate(10.00);
+		regular.setName("Regular car");
+		
+		putVehicleType(regular);
+		
+		VehicleTypeEntity luxury = new VehicleTypeEntity();
+		luxury.setDaily_rate(220.00);
+		luxury.setHourly_rate(20.00);
+		luxury.setName("Luxury car");
+		
+		putVehicleType(luxury);
+		
+		VehicleTypeEntity pickup = new VehicleTypeEntity();
+		pickup.setDaily_rate(185.00);
+		pickup.setHourly_rate(15.00);
+		pickup.setName("Pickup truck");
+		
+		putVehicleType(pickup);
 		
 		}
 		catch(Exception e){
