@@ -20,6 +20,11 @@ public class InvalidInputException extends Exception {
 		messages = new ArrayList<String>();
 	}
 	
+	public InvalidInputException(String message){
+		messages = new ArrayList<String>();
+		messages.add(message);
+	}
+	
 	public void addMessage(String message){
 		messages.add(message);
 	}
