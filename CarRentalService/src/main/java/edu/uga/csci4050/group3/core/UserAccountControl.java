@@ -10,7 +10,7 @@ import edu.uga.csci4050.group3.db.RecordNotFoundException;
 import edu.uga.csci4050.group3.db.SessionManagement;
 
 public class UserAccountControl {
-	public void update(HttpServletRequest request, HttpServletResponse response) throws InvalidInputException, RecordNotFoundException{
+	public void update(HttpServletRequest request, HttpServletResponse response) throws InvalidInputException, RecordNotFoundException, AuthenticationException{
 		
 		// Get the current user
 		SessionManagement sessMan = new SessionManagement(request, response);
@@ -53,5 +53,8 @@ public class UserAccountControl {
 		
 		// Send to database
 		DatabaseAbstraction.updateUser(currentInfo);
+		
+		// Update session
+		sessMan.updateLoggedinUsername(currentInfo.getUsername());
 	}
 }

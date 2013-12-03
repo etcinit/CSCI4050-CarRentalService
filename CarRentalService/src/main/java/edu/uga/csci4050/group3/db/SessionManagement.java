@@ -35,6 +35,15 @@ public class SessionManagement {
 		}
 	}
 	
+	public void updateLoggedinUsername(String username) throws AuthenticationException{
+		// Check if the session contains a user
+		if(request.getSession().getAttribute(SESSION_NAME) == null){
+			throw new AuthenticationException();
+		}else{
+			request.getSession().setAttribute(SESSION_NAME, username);
+		}
+	}
+	
 	public boolean isUserLoggedIn(){
 		try {
 			getLoggedinUsername();

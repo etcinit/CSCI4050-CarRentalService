@@ -13,6 +13,8 @@ import edu.uga.csci4050.group3.db.SessionManagement;
 import edu.uga.csci4050.group3.template.Alert;
 import edu.uga.csci4050.group3.template.AlertType;
 import edu.uga.csci4050.group3.template.LayoutRoot;
+import edu.uga.csci4050.group3.template.SelectForm;
+import edu.uga.csci4050.group3.template.SelectFormType;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 
 public class UserAccountUI implements Boundary {
@@ -47,6 +49,18 @@ public class UserAccountUI implements Boundary {
 		
 		if(type == RequestType.GET) {
 			accountForm.setVariables(user.getData());
+			
+			SelectForm countryForm = new SelectForm(context, SelectFormType.COUNTRY);
+			countryForm.setPreselectedOption(user.getCountry(), user.getCountry());
+			countryForm.setName("userCountry");
+			SelectForm stateForm = new SelectForm(context, SelectFormType.STATE);
+			stateForm.setPreselectedOption(user.getState(), user.getState());
+			stateForm.setName("userState");
+			
+			accountForm.setVariable("select_country", countryForm.render());
+			accountForm.setVariable("select_state", stateForm.render());
+			
+			
 			if (user.getMembershipExpiration() == 0) {
 				accountForm.setVariable("message", new Alert(context, "You don't have a membership yet.", AlertType.WARNING).render());
 			} else if (user.getMembershipExpiration() < DatabaseAbstraction.getTimestampFromDate(new Date())) {
