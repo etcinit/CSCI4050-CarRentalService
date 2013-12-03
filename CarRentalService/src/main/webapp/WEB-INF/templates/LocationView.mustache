@@ -17,13 +17,43 @@
 </div>
 <div class="row pad-top-10">
 	<div class="col-md-4">
-		<h4>Description:</h4>
-		<p>Street address: {{street_address}}</p>
-		<p>City: {{city}}</p>
-		<p>Zipcode: {{zipcode}}</p>
-		<p>State: {{state}}</p>
-		<p>Country: {{country}}</p>
-		<p>Capacity: {{capacity}}</p>
+		<!-- Location description -->
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Details:</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<p>Currently available information on this rental location:</p>
+		    <table class="table">
+		    	<tbody>
+		    		<tr>
+		    			<td><b>Street address: </b></td>
+		    			<td>{{street_address}}</td>
+		    		</tr>
+		    		<tr>
+						<td><b>City: </b></td>
+						<td>{{city}}</td>
+					</tr>
+		    		<tr>
+						<td><b>Zipcode: </b></td>
+						<td>{{zipcode}}</td>
+					</tr>
+		    		<tr>
+						<td><b>State: </b></td>
+						<td>{{state}}</td>
+					</tr>
+		    		<tr>
+						<td><b>Country: </b></td>
+						<td>{{country}}</td>
+					</tr>
+		    		<tr>
+						<td><b>Capacity: </b></td>
+						<td>{{capacity}}</td>
+		    		</tr>
+		    	</tbody>
+		    </table>
+		  </div>
+		</div>	
 	</div>
 	<div class="col-md-8">
 		<h4>Vehicles at this location:</h4>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.uga.csci4050.group3.core.CancelAccountUI;
+import edu.uga.csci4050.group3.core.UserCancelUI;
 import edu.uga.csci4050.group3.admin.LocationCreateUI;
 import edu.uga.csci4050.group3.admin.LocationDeleteUI;
 import edu.uga.csci4050.group3.admin.LocationUpdateUI;
@@ -126,7 +126,7 @@ public class CarRentalServlet extends HttpServlet {
 		}else if(uriMatches(request, "/user/account")){
 			new UserAccountUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/delete")){
-			new CancelAccountUI().handleRequest(request, response, context, type);
+			new UserCancelUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/login")){
 			new UserLoginUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/user/logout")){

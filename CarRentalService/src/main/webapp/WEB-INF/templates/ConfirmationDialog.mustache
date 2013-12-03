@@ -1,13 +1,19 @@
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
-		<div class="jumbotron">
-		  <h1>Are you sure?</h1>
-		  <p>Do you want to continue with the following action:</p>
-		  <p>{{description}}</p>
-		  <p>
-		  	<a href="{{url_yes}}"><button type="button" class="btn btn-danger pull-right">Yes</button></a>
-		  	<a href="{{url_no}}"><button type="button" class="btn btn-default pull-right">No</button></a>
-		  </p>
+		<div class="page-header">
+			<h1>Action confirmation</h1>
+		</div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		  	<h3 class="panel-title">Please confirm the following action:</h3>
+		  </div>
+		  <div class="panel-body">
+		    <p>Are you sure you would like to continue performing the action: "{{description}}"?</p>
+		  	<div class="pad-top-10 btn-group pull-right">
+		  		<a href="{{url_yes}}"><button type="button" class="btn btn-danger">Yes</button></a>
+		  		<a href="{{url_no}}"><button type="button" class="btn btn-default">No</button></a>
+		  	</div>
+		  </div>
 		</div>
 	</div>
 </div>
