@@ -2,6 +2,7 @@ package edu.uga.csci4050.group3.customer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
@@ -49,15 +50,18 @@ public class MembershipPaymentControl {
 			e.printStackTrace();
 		}
 		
-		if (user.getMembershipExpiration() == 0 || (user.getMembershipExpiration() < DatabaseAbstraction.getTimestampFromDate(new Date()))) { // Expired or non-existent
-			Date newDate = new Date();
-			newDate.setMonth((newDate.getMonth() + 6));
-			user.setMembershipExpirationDate(newDate);
+		Date currentExpiration;
+		if (user.getMembershipExpiration() == 0 || 
+				(user.getMembershipExpiration() < DatabaseAbstraction.getTimestampFromDate(new Date()))) { // Expired or non-existent
+			currentExpiration = new Date();
 		} else { // Not expired
-			Date newDate = user.getMembershipExpirationDate();
-			newDate.setMonth((newDate.getMonth() + 6));
-			user.setMembershipExpirationDate(newDate);
+			currentExpiration = user.getMembershipExpirationDate();
 		}
+		Calendar c = Calendar.getInstance();
+		c.setTime(currentExpiration);
+		c.add(Calendar.MONTH, 6);
+		Date newDate = c.getTime();
+		user.setMembershipExpirationDate(newDate);
 	}
 	
 	public double getMembershipFee(ServletContext context) {
