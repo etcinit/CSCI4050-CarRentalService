@@ -32,9 +32,14 @@ public class MembershipCancelUI implements Boundary{
 		}
 		
 		// Process termination
-		if(control.processCancellation(request, response)){
-			CarRentalServlet.redirect(context, response, "/membership");
-			return;
+		try {
+			if(control.processCancellation(request, response)){
+				CarRentalServlet.redirect(context, response, "/membership");
+				return;
+			}
+		} catch (InvalidInputException e) {
+			lr.setContent(e.getMessagesHtml(context));
+			lr.render(response);
 		}
 		
 		// Show dialog or confirm cancellation

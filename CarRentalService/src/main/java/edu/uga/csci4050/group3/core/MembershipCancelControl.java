@@ -46,7 +46,7 @@ public class MembershipCancelControl {
 		}
 	}
 	
-	public boolean processCancellation(HttpServletRequest request, HttpServletResponse response) {
+	public boolean processCancellation(HttpServletRequest request, HttpServletResponse response) throws InvalidInputException {
 		
 		// Try to get username
 		String username = null;
@@ -65,6 +65,11 @@ public class MembershipCancelControl {
 		UserEntity user = null;
 		try {
 			user = DatabaseAbstraction.getUserByUsername(username);
+			if(user.getMembershipExpiration() == 0){
+				InvalidInputException invalidEx = new InvalidInputException();
+				invalidEx.addMessage("Your membership is already terminated");
+				throw invalidEx;
+			}
 		} catch (RecordNotFoundException e) {
 			e.printStackTrace();
 		}
