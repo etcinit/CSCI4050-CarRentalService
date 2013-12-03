@@ -30,6 +30,7 @@
   	
   	<url-pattern>/membership</url-pattern>
   	<url-pattern>/membership/purchase</url-pattern>
+  	<url-pattern>/membership/cancel</url-pattern>
   	
   	<url-pattern>/vehicles</url-pattern>
   	<url-pattern>/vehicle/*</url-pattern>
