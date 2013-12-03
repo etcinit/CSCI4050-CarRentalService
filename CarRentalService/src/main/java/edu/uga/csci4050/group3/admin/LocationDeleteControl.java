@@ -13,7 +13,7 @@ public class LocationDeleteControl {
 			throw new InvalidUrlException();
 		}
 		
-		String UID = request.getParameter("UID");
+		String UID = request.getParameter("uid");
 		
 		DatabaseAbstraction.deleteLocation(UID);
 	}
