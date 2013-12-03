@@ -87,10 +87,71 @@ public class VehicleRentControl {
 		try{
 			List<RentalTransactionEntity> conflicts = DatabaseAbstraction.getConflictingRentalTransactions(veh.getUid(), start_date, end_date);
 			return false;
+
 		}
 		catch(RecordNotFoundException ex){
 			return true;
 		}
+	}
+	
+	public List<VehicleEntity> getAlternateVehicle( HttpServletRequest request ) throws RecordNotFoundException, InvalidUrlException{
+		
+
+		VehicleEntity unavailableVeh = DatabaseAbstraction.getVehicle(request.getParameter("rentalVehicleUID"));
+		String thisLocation = unavailableVeh.getLocation(); //get the current location
+		List<VehicleEntity> others = DatabaseAbstraction.getVehicles(); 
+		
+		Date start_date = new Date();
+		Date end_date = new Date();
+		
+		// Check that we have a UID
+		if(!request.getParameterMap().containsKey("rentalVehicleUID")){
+			throw new InvalidUrlException();
+		}
+		if(!request.getParameterMap().containsKey("rentalStartDate")){
+			throw new InvalidUrlException();
+		}
+		if(!request.getParameterMap().containsKey("rentalEndDate")){
+			throw new InvalidUrlException();
+		}
+		
+		// Parse dates
+		InvalidInputException invalidEx = new InvalidInputException();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		
+		try {
+			start_date = sdf.parse(request.getParameter("rentalStartDate"));
+			
+		} catch (ParseException e) {
+			invalidEx.addMessage("Invalid start date format");
+		}
+		try {
+			end_date = sdf.parse(request.getParameter("rentalEndDate"));
+		} catch (ParseException e) {
+			invalidEx.addMessage("Invalid end date format");
+		}
+		
+		List<VehicleEntity> list = DatabaseAbstraction.getVehicles();
+		//search through other vehicles at the same location
+		for(VehicleEntity veh : others){
+			//if vehicle is at the same location, check to see if there are conflicts
+			if(veh.getLocation().compareToIgnoreCase(unavailableVeh.getLocation()) == 0 ){
+				if(veh.getUid().compareToIgnoreCase(unavailableVeh.getUid()) != 0){
+					list.add(veh);
+				}
+			}
+		}
+		return list;
+			/* this code wasn't working so I changed the method to return list of cars instead of one car. 
+			if(veh.getLocation().compareTo(unavailableVeh.getLocation()) == 0){
+				List<RentalTransactionEntity> conflicts = DatabaseAbstraction.getConflictingRentalTransactions(veh.getUid(), start_date, end_date);
+				if(veh.getUid().compareToIgnoreCase(unavailableVeh.getUid()) < 0){
+					return veh;
+				}
+			}
+			continue;
+		}
+		return null;*/
 	}
 	
 	public VehicleTypeEntity getType(HttpServletRequest request) throws InvalidUrlException, RecordNotFoundException{
