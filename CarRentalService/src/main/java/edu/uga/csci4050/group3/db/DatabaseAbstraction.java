@@ -559,12 +559,12 @@ public class DatabaseAbstraction {
 		
 		LocationEntity location3 = new LocationEntity();
 		location3.setName("North Charleston");
-		location2.setStreet_address("13 East Bay St");
-		location2.setCity("Charleston");
-		location2.setState("SC");
-		location2.setCountry("US");
-		location2.setZipcode(29464);
-		location2.setCapacity(80);
+		location3.setStreet_address("13 East Bay St");
+		location3.setCity("Charleston");
+		location3.setState("SC");
+		location3.setCountry("US");
+		location3.setZipcode(29464);
+		location3.setCapacity(80);
 		
 		putLocation(location3);
 		
