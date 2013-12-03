@@ -301,7 +301,7 @@ public class DatabaseAbstraction {
 	public static void putRentalTransaction(RentalTransactionEntity transaction){
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		RentalTransactionRecord tranRec = create.newRecord(RentalTransaction.RENTAL_TRANSACTION,transaction);
-		create.insertInto(RentalLocation.RENTAL_LOCATION).set(tranRec).execute();
+		create.insertInto(RentalTransaction.RENTAL_TRANSACTION).set(tranRec).execute();
 	}
 	
 	public static void updateRentalTransaction(RentalTransactionEntity transaction){

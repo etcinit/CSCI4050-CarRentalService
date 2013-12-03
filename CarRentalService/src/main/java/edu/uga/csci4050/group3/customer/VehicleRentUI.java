@@ -63,14 +63,34 @@ public class VehicleRentUI implements Boundary {
 					VehicleTypeEntity vtype = control.getType(request);
 					availableLayout.setVariable("daily_rate", String.valueOf(vtype.getDaily_rate()));
 					availableLayout.setVariable("hourly_rate", String.valueOf(vtype.getHourly_rate()));
+					availableLayout.setVariable("amount", String.valueOf(control.getTotalAmount(request)));
+					
+					// Get vehicle that the user would like to rent
+					VehicleEntity vehicle = control.getVehicle(request);
+					
+					// Load variables into the vehicle card
+					cardTemplate.setVariables(vehicle.getCustomerData()); 
+					
+					availableLayout.setVariable("vehicle_card", cardTemplate.render());
 					
 					// Render
 					lr.setContent(availableLayout.render());
 					lr.render(response);
 				}else{
 					// TODO: Vehicle is not available
-					// We need a database functions that looks for vehicle that are available
-					// It's probably the most complex piece of code in this thing
+					SimpleTemplate unavailableLayout = new SimpleTemplate(context, "VehicleRentUnavailable.mustache");
+					
+					// Get vehicle that the user would like to rent
+					VehicleEntity vehicle = control.getVehicle(request);
+					
+					// Load variables into the vehicle card
+					cardTemplate.setVariables(vehicle.getCustomerData()); 
+					
+					unavailableLayout.setVariable("vehicle_card", cardTemplate.render());
+					
+					// Render
+					lr.setContent(unavailableLayout.render());
+					lr.render(response);
 				}
 			} catch (RecordNotFoundException e) {
 				lr.setContent(new Alert(context,"Vehicle with UID not found").render());

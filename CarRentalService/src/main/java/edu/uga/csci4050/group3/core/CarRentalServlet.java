@@ -29,6 +29,7 @@ import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 import edu.uga.csci4050.group3.customer.LocationFilterUI;
 import edu.uga.csci4050.group3.customer.MembershipPaymentUI;
+import edu.uga.csci4050.group3.customer.VehicleRentConfirmUI;
 import edu.uga.csci4050.group3.customer.VehicleRentUI;
 import edu.uga.csci4050.group3.customer.MembershipUI;
 import edu.uga.csci4050.group3.customer.ReservationCancelUI;
@@ -107,6 +108,8 @@ public class CarRentalServlet extends HttpServlet {
 			new RentalListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/rental/cancel")){
 			new RentalCancelUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/rental/confirm")){
+			new VehicleRentConfirmUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/reservations")){
 			new ReservationListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/reservation/return")){
