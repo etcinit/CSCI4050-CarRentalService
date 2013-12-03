@@ -295,6 +295,10 @@ public class DatabaseAbstraction {
 						.and(RentalTransaction.RENTAL_TRANSACTION.STATUS.equal("ACTIVE")))
 				.or(RentalTransaction.RENTAL_TRANSACTION.START_DATE.lessThan(iend_date).and(RentalTransaction.RENTAL_TRANSACTION.END_DATE.greaterThan(iend_date))
 						.and(RentalTransaction.RENTAL_TRANSACTION.STATUS.equal("ACTIVE")))
+				.or(RentalTransaction.RENTAL_TRANSACTION.START_DATE.equal(istart_date))
+				.or(RentalTransaction.RENTAL_TRANSACTION.START_DATE.equal(iend_date))
+				.or(RentalTransaction.RENTAL_TRANSACTION.END_DATE.equal(iend_date))
+				.or(RentalTransaction.RENTAL_TRANSACTION.END_DATE.equal(istart_date))
 				.fetch().into(RentalTransactionEntity.class);
 		if(result.size() > 0){
 			return result;
