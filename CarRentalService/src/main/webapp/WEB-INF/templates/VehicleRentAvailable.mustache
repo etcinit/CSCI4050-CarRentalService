@@ -23,7 +23,7 @@
 		
 		<p>According to the dates you selected, your rental will cost a total of ${{amount}}</p>
 		
-		<form role="form" action="{{base_url}}/rental/confirm" method="POST" >
+		<form role="form" action="{{base_url}}/rent/process" method="POST" >
 			<div class="form-group">
 				<label for="rentalVehicleUID">Vehicle UID:</label>
 				<input type="text" class="form-control" id="rentalVehicleUID" placeholder="UID missing" value={{uid}} disabled="disabled">
