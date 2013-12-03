@@ -1,0 +1,61 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1>Vehicle rental overview</h1>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-4">
+		<h4>Selected vehicle:</h4>
+		<p>This is the vehicle that will be used when looking for available times:</p>
+		{{{vehicle_card}}}
+	</div>
+	<div class="col-md-8">
+		<div class="alert alert-success"><b>Nice!</b> The vehicle that you are looking for is available at those time</div>
+		<h4>Payment and rental confirmation:</h4>
+		
+		<p>The following account will be billed for the length of the rental. Please note that there may be additional charges if the vehicle is returned late.</p>
+		
+		<h5>Current rate for this vehicle:</h5>
+		<p><b>Hourly:</b> ${{hourly_rate}}</p>
+		<p><b>Daily:</b> ${{daily_rate}}</p>
+		
+		<p>According to the dates you selected, your rental will cost a total of ${{amount}}</p>
+		
+		<form role="form" action="{{base_url}}/rental/confirm" method="POST" >
+			<div class="form-group">
+				<label for="rentalVehicleUID">Vehicle UID:</label>
+				<input type="text" class="form-control" id="rentalVehicleUID" placeholder="UID missing" value={{uid}} disabled="disabled">
+			</div>
+			
+			<input type="hidden" name="rentalVehicleUID" value={{uid}}>
+			
+			<div class="form-group">
+				<label for="rentalStartDate">Start date and time:</label>
+				<input type="datetime-local" class="form-control" id="rentalStartDate" required="required" value={{start_date}} disabled="disabled">
+			</div>
+			
+			<input type="hidden" name="rentalStartDate" value={{start_date}}>
+			
+			<div class="form-group">
+				<label for="rentalEndDate">End date and time:</label>
+				<input type="datetime-local" class="form-control" id="rentalEndDate" required="required" value={{end_date}} disabled="disabled">
+			</div>
+			
+			<input type="hidden" name="rentalEndDate" value={{end_date}}>
+			
+			<div class="form-group">
+	        	<label for="rentalCardNumber">Credit or Debit Card Number</label>
+	        	<input type="text" class="form-control" id="rentalCardNumber" name="rentalCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX" required autofocus>
+	        </div>
+	        
+	        <div class="form-group">
+	        	<label for="rentalCSV">Card CSV Code</label>
+	        	<input type="text" class="form-control" id="rentalCSV" name="rentalCSV" placeholder="XXXX" required>
+	        </div>
+			
+			<button type="submit" class="btn btn-success pull-right">Pay and confirm rental</button>
+		</form>
+	</div>
+</div>

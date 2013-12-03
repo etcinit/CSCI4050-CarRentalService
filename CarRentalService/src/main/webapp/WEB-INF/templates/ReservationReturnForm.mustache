@@ -1,0 +1,18 @@
+<form role="form" method="POST">
+
+  <div class="form-group">
+    <label for="rentalUID">Rental UID</label>
+    <input type="text" class="form-control" id="rentalUID" name="uid" placeholder="UID missing" value="{{uid}}" disabled="disabled">
+  </div>
+  
+  <p>Additional comments about your experience:</p>
+  
+  <div class="form-group">
+    <label for="rentalComments">Comments</label>
+    <textarea rows="3" class="form-control" id="rentalComments" name="rentalComments" placeholder="Enter comments about your experience"></textarea>
+  </div>
+  
+  <input type="hidden" name="rentalUID" value="{{uid}}">
+
+  <button type="submit" class="btn btn-primary pull-right">Return vehicle</button>
+</form>

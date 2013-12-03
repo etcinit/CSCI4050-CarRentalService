@@ -1,6 +1,6 @@
 package edu.uga.csci4050.group3.customer;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +10,11 @@ import edu.uga.csci4050.group3.core.AuthenticationException;
 import edu.uga.csci4050.group3.core.Boundary;
 import edu.uga.csci4050.group3.core.CarRentalServlet;
 import edu.uga.csci4050.group3.core.InvalidInputException;
+import edu.uga.csci4050.group3.core.InvalidUrlException;
 import edu.uga.csci4050.group3.core.RequestType;
-import edu.uga.csci4050.group3.core.UserLoginControl;
-import edu.uga.csci4050.group3.db.Settings;
+import edu.uga.csci4050.group3.core.UserType;
+import edu.uga.csci4050.group3.db.RecordNotFoundException;
+import edu.uga.csci4050.group3.db.SessionManagement;
 import edu.uga.csci4050.group3.template.Alert;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
@@ -25,48 +27,62 @@ public class MembershipPaymentUI implements Boundary {
 			RequestType type) {
 		LayoutRoot lr = new LayoutRoot(context,request,response);
 		SimpleTemplate paymentForm = new SimpleTemplate(context, "MembershipPaymentForm.mustache");
-		SimpleTemplate centCol = new SimpleTemplate(context, "CenteredColumn.mustache");
-		
-		lr.setTitle("Membership");
-		
 		MembershipPaymentControl mpc = new MembershipPaymentControl();
 		
-		if(mpc.isLoggedIn(request, response)){
-			if(type == RequestType.GET) {
+		lr.setTitle("Membership extension payment");
+		
+		// Check if the user is authorized
+		ArrayList<UserType> authTypes = new ArrayList<UserType>();
+		authTypes.add(UserType.ADMIN);
+		authTypes.add(UserType.CUSTOMER);
+		if(new SessionManagement(request, response).requireRole(authTypes, CarRentalServlet.getFullURL(context, "/user/home"))){
+			return;
+		}
+		
+		if(type == RequestType.GET) {
+			// Show the payment form and costs
+			try {
 				double value = mpc.getMembershipFee(context);
 				paymentForm.setVariable("price", String.valueOf(value));
-				
-				centCol.setVariable("content", paymentForm.render());
-			
-				lr.setContent(centCol.render());
-				lr.render(response);
-			} else {
-				try {
-					mpc.authenticate(request, response);
-					mpc.extendMembership(request, response);
-					response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/account"));
-				} catch (InvalidInputException e) {
-					// Generate alert
-					Alert alert = new Alert(context);
-					alert.setContent("Invalid input. Check credit card info and security key.");
-					paymentForm.setVariable("alert", alert.render());
-				
-					// Show the payment form
-					centCol.setVariable("content", paymentForm.render());
-					lr.setContent(centCol.render());
-					lr.render(response);
-				} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				if(mpc.getExpirationDate(request, response).getTime() == 0){
+					paymentForm.setVariable("expiration", "Unavailable");
+				}else{
+					paymentForm.setVariable("expiration", mpc.getExpirationDateString(request, response));
 				}
+				lr.setContent(paymentForm.render());
+				lr.render(response);
+			} catch (AuthenticationException e) {
+				lr.setContent(new Alert(context,"Unable to process your request.").render());
+				lr.render(response);
+				return;
+			} catch (RecordNotFoundException e) {
+				lr.setContent(new Alert(context,"Unable to process your request.").render());
+				lr.render(response);
+				return;
 			}
 		} else {
+			// Try to process a membership extension
 			try {
-				response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/login"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				mpc.extendMembership(request, response);
+				CarRentalServlet.redirect(context, response, "/membership");
+				return;
+			} catch (InvalidUrlException e) {
+				lr.setContent(new Alert(context,"Invalid UID provided.").render());
+				lr.render(response);
+				return;
+			} catch (InvalidInputException e) {
+				lr.setContent(e.getMessagesHtml(context));
+				lr.render(response);
+				return;
+			} catch (RecordNotFoundException e) {
+				lr.setContent(new Alert(context,"Invalid find user").render());
+				lr.render(response);
+				return;
+			} catch (AuthenticationException e) {
+				lr.setContent(new Alert(context,"Unable to process your request.").render());
+				lr.render(response);
+				return;
 			}
-		}	
+		}
 	}
 }

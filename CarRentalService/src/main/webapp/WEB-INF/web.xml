@@ -52,7 +52,12 @@
   	
   	<url-pattern>/rent</url-pattern>
   	<url-pattern>/rentals</url-pattern>
+  	<url-pattern>/rental/confirm</url-pattern>
   	<url-pattern>/rental/cancel</url-pattern>
+  	
+  	<url-pattern>/reservations</url-pattern>
+  	<url-pattern>/reservation/cancel</url-pattern>
+  	<url-pattern>/reservation/return</url-pattern>
   	
   	<url-pattern>/service</url-pattern>
   	

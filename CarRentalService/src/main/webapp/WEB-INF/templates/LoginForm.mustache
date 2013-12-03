@@ -1,15 +1,24 @@
+<form class="form-signin" method="post">
+	<div class="page-header">
+		<h2 class="form-signin-heading">Please sign in</h2>
+	</div>
 
-      <form class="form-signin" method="post">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <p>In order to use this service you must be logged in</p>
-        <div>{{{alert}}}</div>
-        <div class="form-group">
-        	<input type="text" class="form-control" name="userUsername" placeholder="Username" required autofocus>
-        </div>
-        <div class="form-group">
-        	<input type="password" class="form-control" name="userPassword" placeholder="Password" required>
-        </div>
-        <div class="form-group">
-        	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        </div>
-      </form>
+	<p>In order to use this service you must be currently logged in:</p>
+	<div>{{{alert}}}</div>
+	<div class="form-group">
+		<input type="text" class="form-control" name="userUsername"
+			placeholder="Username" required autofocus>
+	</div>
+	<div class="form-group">
+		<input type="password" class="form-control" name="userPassword"
+			placeholder="Password" required>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+			in</button>
+	</div>
+</form>
+<p>
+	Don't have an account? <a href="{{base_url}}/user/register">Creating
+		an account is easy &rightarrow;</a>
+</p>

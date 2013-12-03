@@ -19,6 +19,8 @@ public class UserHomeUI implements Boundary{
 		UserHomeControl control = new UserHomeControl();
 		LayoutRoot lr = new LayoutRoot(context,request,response);
 		
+		lr.setTitle("User home");
+		
 		if(control.isLoggedIn(request, response)){
 			SimpleTemplate custLayout = new SimpleTemplate(context, "UserHomeLayout.mustache");
 			SimpleTemplate adminLayout = new SimpleTemplate(context, "UserHomeLayoutAdmin.mustache");

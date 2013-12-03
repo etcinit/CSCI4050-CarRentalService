@@ -12,7 +12,7 @@ body {
 /* Carousel base class */
 .carousel {
 	position:absolute;
-	top: 50px;
+	top: 0px;
 	bottom: 0px;
 	left: 0px;
 	overflow:hidden;
@@ -23,7 +23,7 @@ body {
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
-  margin-bottom: 10%;
+  margin-bottom: 15%;
 }
 
 /* Declare heights because of positioning of img element */
