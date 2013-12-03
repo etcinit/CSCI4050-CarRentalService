@@ -1,6 +1,7 @@
 package edu.uga.csci4050.group3.core;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +11,7 @@ import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.db.RecordNotFoundException;
 import edu.uga.csci4050.group3.db.SessionManagement;
 import edu.uga.csci4050.group3.template.Alert;
+import edu.uga.csci4050.group3.template.AlertType;
 import edu.uga.csci4050.group3.template.LayoutRoot;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 
@@ -46,16 +48,21 @@ public class UserAccountUI implements Boundary {
 		}
 		
 		if(type == RequestType.GET) {
-			accountForm.setVariable("username", user.getUsername());
-			accountForm.setVariable("password", user.getPassword());
-			accountForm.setVariable("email", user.getEmail());
+			accountForm.setVariables(user.getData());
+			if (user.getMembershipExpiration() == 0) {
+				accountForm.setVariable("message", new Alert(context, "You don't have a membership yet.", AlertType.WARNING).render());
+			} else if (user.getMembershipExpiration() < DatabaseAbstraction.getTimestampFromDate(new Date())) {
+				accountForm.setVariable("message", new Alert(context, "Your membership has expired.", AlertType.ERROR).render());
+			} else {
+				accountForm.setVariable("message", new Alert(context, "Your membership expires on " + user.getMembershipExpirationDate(), AlertType.INFO).render());
+			}
 			lr.setContent(accountForm.render());
 			lr.render(response);
 		} else {
 			UserAccountControl uac = new UserAccountControl();
 			try {
 				uac.update(request, response);
-				accountForm.setVariable("alerts", "Account Updated!");
+				accountForm.setVariable("alerts", new Alert(context, "Account updated!", AlertType.SUCCESS).render());
 				lr.setContent(accountForm.render());
 				lr.render(response);
 			} catch (InvalidInputException e) {

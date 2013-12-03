@@ -372,8 +372,10 @@ public class UserEntity {
 		data.put("first_name",this.first_name);
 		data.put("last_name",this.last_name);
 		data.put("email",this.email);
+		data.put("password",this.password);
 		data.put("address",this.address);
 		data.put("state",this.state);
+		data.put("city",this.city);
 		data.put("country",this.country);
 		data.put("license",this.license);
 		data.put("role", getRoleEnum().toString());

@@ -1,5 +1,8 @@
 package edu.uga.csci4050.group3.customer;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -32,6 +35,29 @@ public class MembershipPaymentControl {
 		if (!(creditCard.length() == 16 && securityKey.length() == 3)) {
 			throw new InvalidInputException();
 		} 
+	}
+	public void extendMembership(HttpServletRequest request, HttpServletResponse response) {
+		SessionManagement sessMan = new SessionManagement(request, response);
+		UserEntity user = null;
+		try {
+			user = DatabaseAbstraction.getUserByUsername(sessMan.getLoggedinUsername());
+		} catch (AuthenticationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (RecordNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (user.getMembershipExpiration() == 0 || (user.getMembershipExpiration() < DatabaseAbstraction.getTimestampFromDate(new Date()))) { // Expired or non-existent
+			Date newDate = new Date();
+			newDate.setMonth((newDate.getMonth() + 6));
+			user.setMembershipExpirationDate(newDate);
+		} else { // Not expired
+			Date newDate = user.getMembershipExpirationDate();
+			newDate.setMonth((newDate.getMonth() + 6));
+			user.setMembershipExpirationDate(newDate);
+		}
 	}
 	
 	public double getMembershipFee(ServletContext context) {

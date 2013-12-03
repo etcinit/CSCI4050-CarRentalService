@@ -2,68 +2,69 @@
 <div class="col-md-6 col-md-offset-3">
 <div class="page-header">
 	<h1>Your Account</h1>
+	<h2>{{{message}}}</h2>
 </div>
 <div>{{{alerts}}}</div>
-<form role="form" method="post" action={{base_url}}/user/register>
+<form role="form" method="post" action={{base_url}}/user/account>
 
   <div class="form-group">
     <label for="userUsername">Username</label>
-    <input type="text" class="form-control" id="userUsername" name="userUsername" placeholder={{username}}>
+    <input type="text" class="form-control" id="userUsername" name="userUsername" placeholder="Enter a username" value={{username}}>
   </div>
   
   <div class="form-group">
     <label for="userPassword">Password</label>
-    <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder={{password}}>
+    <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Enter password" value={{password}}>
   </div>
   
   <div class="form-group">
     <label for="userEmail">Email</label>
-    <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder={{email}}>
+    <input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="you@example.com" value={{email}}>
   </div>
   
   <div class="form-group">
     <label for="userFirstName">First name</label>
-    <input type="text" class="form-control" id="userFirstName" name="userFirstName" placeholder="Enter your first name">
+    <input type="text" class="form-control" id="userFirstName" name="userFirstName" placeholder="Enter your first name" value={{first_name}}>
   </div>
   
   <div class="form-group">
     <label for="userLastName">Last name</label>
-    <input type="text" class="form-control" id="userLastName" name="userLastName" placeholder="Enter your last name">
+    <input type="text" class="form-control" id="userLastName" name="userLastName" placeholder="Enter your last name" value={{last_name}}>
   </div>
   
   <div class="form-group">
     <label for="userLastName">License number</label>
-    <input type="text" class="form-control" id="userLicense" name="userLicense" placeholder="0000-0000-0000-0000">
+    <input type="text" class="form-control" id="userLicense" name="userLicense" placeholder="0000-0000-0000-0000" value={{license}}>
   </div>
   
   <div class="form-group">
     <label for="userDateOfBirth">Date of birth</label>
-    <input type="date" class="form-control" id="userDateOfBirth" name="userDateOfBirth" placeholder="YYYY-MM-DD">
+    <input type="date" class="form-control" id="userDateOfBirth" name="userDateOfBirth" placeholder="YYYY-MM-DD" value={{dateofbirth}}>
   </div>
   
   <div class="form-group">
     <label for="userAddress">Address</label>
-    <input type="text" class="form-control" id="userAddress" name="userAddress" placeholder="Enter your address">
+    <input type="text" class="form-control" id="userAddress" name="userAddress" placeholder="Enter your address" value={{address}}>
   </div>
   
   <div class="form-group">
     <label for="userCity">City</label>
-    <input type="text" class="form-control" id="userCity" name="userCity" placeholder="Enter your city">
+    <input type="text" class="form-control" id="userCity" name="userCity" placeholder="Enter your city" value={{city}}>
   </div>
   
   <div class="form-group">
     <label for="userState">State</label>
-    <input type="text" class="form-control" id="userState" name="userState" placeholder="Enter your state">
+    <input type="text" class="form-control" id="userState" name="userState" placeholder="Enter your state" value={{state}}>
   </div>
   
   <div class="form-group">
     <label for="userCountry">Country</label>
-    <input type="text" class="form-control" id="userCountry" name="userCountry" placeholder="Enter your country">
+    <input type="text" class="form-control" id="userCountry" name="userCountry" placeholder="Enter your country" value={{country}}>
   </div>
   
   <div class="form-group">
     <label for="userZipcode">Zip code</label>
-    <input type="number" class="form-control" id="userZipcode" name="userZipcode" placeholder="10000">
+    <input type="number" class="form-control" id="userZipcode" name="userZipcode" placeholder="10000" value={{zipcode}}>
   </div>
   
   <button type="submit" class="btn btn-primary pull-right">Update Account</button>

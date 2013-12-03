@@ -43,8 +43,8 @@ public class MembershipPaymentUI implements Boundary {
 			} else {
 				try {
 					mpc.authenticate(request, response);
-				
-					response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/home"));
+					mpc.extendMembership(request, response);
+					response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/account"));
 				} catch (InvalidInputException e) {
 					// Generate alert
 					Alert alert = new Alert(context);

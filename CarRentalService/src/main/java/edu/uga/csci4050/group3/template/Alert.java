@@ -16,6 +16,13 @@ public class Alert extends Template{
 	String servlet_name;
 	String content;
 	
+	public Alert(ServletContext context, String content, AlertType type){
+		super(context);
+		setType(type);;
+		servlet_name = context.getContextPath();
+		this.content = content;
+	}
+	
 	public Alert(ServletContext context, String content){
 		super(context);
 		type = "danger";

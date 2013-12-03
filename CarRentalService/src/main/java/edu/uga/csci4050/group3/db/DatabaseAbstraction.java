@@ -494,6 +494,7 @@ public class DatabaseAbstraction {
 		customer.setCity("Athens");
 		customer.setCountry("USA");
 		customer.setState("Georgia");
+		customer.setMembershipExpirationDate(new Date());
 		customer.setDateofbirth(0);
 		customer.setRoleFromEnum(UserType.CUSTOMER);
 		customer.setLicense("0000-0001");
