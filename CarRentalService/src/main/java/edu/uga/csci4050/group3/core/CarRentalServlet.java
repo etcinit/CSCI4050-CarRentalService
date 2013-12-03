@@ -145,6 +145,8 @@ public class CarRentalServlet extends HttpServlet {
 			new MembershipUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/membership/purchase")){
 			new MembershipPaymentUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/membership/cancel")){
+			new MembershipCancelUI().handleRequest(request, response, context, type);
 		}else{
 			// Basic page for debugging URLs
 			LayoutRoot lr = new LayoutRoot(getServletContext(),request,response);
