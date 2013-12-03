@@ -13,7 +13,7 @@ import edu.uga.csci4050.group3.admin.*;
 import edu.uga.csci4050.group3.db.*;
 import edu.uga.csci4050.group3.template.SimpleTemplate;
 
-public class CreateRentalControl {
+public class VehicleRentControl {
 
 	public VehicleEntity getVehicle(HttpServletRequest request) throws InvalidUrlException, RecordNotFoundException {
 		// Check that we have a UID
