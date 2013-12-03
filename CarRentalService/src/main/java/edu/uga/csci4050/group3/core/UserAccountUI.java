@@ -30,10 +30,8 @@ public class UserAccountUI implements Boundary {
 		try {
 			user = DatabaseAbstraction.getUserByUsername(sessMan.getLoggedinUsername());
 		} catch (AuthenticationException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		} catch (RecordNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 				
@@ -62,6 +60,14 @@ public class UserAccountUI implements Boundary {
 			UserAccountControl uac = new UserAccountControl();
 			try {
 				uac.update(request, response);
+				try {
+					user = DatabaseAbstraction.getUserByUsername(sessMan.getLoggedinUsername());
+				} catch (AuthenticationException e1) {
+					e1.printStackTrace();
+				} catch (RecordNotFoundException e) {
+					e.printStackTrace();
+				}
+				accountForm.setVariables(user.getData());
 				accountForm.setVariable("alerts", new Alert(context, "Account updated!", AlertType.SUCCESS).render());
 				lr.setContent(accountForm.render());
 				lr.render(response);

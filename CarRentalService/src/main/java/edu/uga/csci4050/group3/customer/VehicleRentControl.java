@@ -35,6 +35,7 @@ public class VehicleRentControl {
 		
 		Date start_date = new Date();
 		Date end_date = new Date();
+		Date today_date = new Date();
 		
 		// Check that we have a UID
 		if(!request.getParameterMap().containsKey("rentalVehicleUID")){
@@ -55,6 +56,7 @@ public class VehicleRentControl {
 		
 		try {
 			start_date = sdf.parse(request.getParameter("rentalStartDate"));
+			
 		} catch (ParseException e) {
 			invalidEx.addMessage("Invalid start date format");
 		}
@@ -63,6 +65,16 @@ public class VehicleRentControl {
 			end_date = sdf.parse(request.getParameter("rentalEndDate"));
 		} catch (ParseException e) {
 			invalidEx.addMessage("Invalid end date format");
+		}
+		//validate the rental dates entered by the user. 
+		if(start_date.getTime() > end_date.getTime()){
+			invalidEx.addMessage("Please enter an end date that is after the start date");
+		}
+		if(start_date.getTime() < today_date.getTime() ){
+			invalidEx.addMessage("Start date cannot be prior to Today, please enter a future date.");
+		}
+		if(end_date.getTime() < today_date.getTime() ){
+			invalidEx.addMessage("End date cannot be prior to Today, please enter a future date.");
 		}
 		
 		if(invalidEx.countMessages() > 0){
