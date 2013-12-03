@@ -1,5 +1,7 @@
 package edu.uga.csci4050.group3.customer;
 
+import java.util.List;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -87,6 +89,24 @@ public class VehicleRentUI implements Boundary {
 					cardTemplate.setVariables(vehicle.getCustomerData()); 
 					
 					unavailableLayout.setVariable("vehicle_card", cardTemplate.render());
+					
+					List<VehicleEntity> alternateVeh = control.getAlternateVehicle(request);
+					SimpleTemplate cardTemplate2 = new SimpleTemplate(context, "VehicleCardCustomer.mustache");
+					String vehicles = "";
+					if(alternateVeh.size()  == 0){
+						unavailableLayout.setVariable("alternate_vehicles", "No other available cars at this location during that rental period");
+					}else{
+						for(VehicleEntity veh : alternateVeh){
+							if(veh.getLocation().compareToIgnoreCase(vehicle.getLocation()) == 0){
+								SimpleTemplate anotherCard = new SimpleTemplate(context, "VehicleCard.mustache");
+								anotherCard.setVariables(veh.getCustomerData());
+								vehicles += anotherCard.render();
+								
+							}
+						}
+						
+						unavailableLayout.setVariable("alternate_vehicles", vehicles);
+					}
 					
 					// Render
 					lr.setContent(unavailableLayout.render());
