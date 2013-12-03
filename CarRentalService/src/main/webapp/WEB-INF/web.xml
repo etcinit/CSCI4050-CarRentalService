@@ -59,6 +59,8 @@
   	<url-pattern>/reservation/cancel</url-pattern>
   	<url-pattern>/reservation/return</url-pattern>
   	
+  	<url-pattern>/payments</url-pattern>
+  	
   	<url-pattern>/service</url-pattern>
   	
   	<url-pattern>/database/setup</url-pattern>

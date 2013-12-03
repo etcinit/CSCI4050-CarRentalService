@@ -1,6 +1,9 @@
 package edu.uga.csci4050.group3.core;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
+import edu.uga.csci4050.group3.db.RecordNotFoundException;
 
 public class PaymentTransactionEntity {
 
@@ -128,5 +132,26 @@ public class PaymentTransactionEntity {
 			
 			throw iief.buildException(constraintViolations);
 		}
+	}
+	
+	public Map<String, String> getData(){
+		Map<String, String> data = new HashMap<String, String>();
+		SimpleDateFormat sdftime = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+		
+		//Try to get username
+		try {
+			UserEntity user = DatabaseAbstraction.getUser(this.getUser());
+			data.put("username", user.getUsername());
+		} catch (RecordNotFoundException e) {
+			data.put("username", "Unavailable");
+		}
+		
+		// Get other variables
+		data.put("description",this.description);
+		data.put("reason",this.reason);
+		data.put("method", this.method);
+		data.put("date", sdftime.format(DatabaseAbstraction.getDateFromTimestamp(this.date)));
+		
+		return data;
 	}
 }

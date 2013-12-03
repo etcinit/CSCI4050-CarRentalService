@@ -1,9 +1,7 @@
 package edu.uga.csci4050.group3.customer;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletContext;
@@ -18,7 +16,6 @@ import edu.uga.csci4050.group3.core.PaymentTransactionEntity;
 import edu.uga.csci4050.group3.core.UserEntity;
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
 import edu.uga.csci4050.group3.db.RecordNotFoundException;
-import edu.uga.csci4050.group3.db.SessionException;
 import edu.uga.csci4050.group3.db.SessionManagement;
 import edu.uga.csci4050.group3.db.Settings;
 
