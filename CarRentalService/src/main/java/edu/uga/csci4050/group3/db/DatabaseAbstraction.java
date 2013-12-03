@@ -2,9 +2,13 @@ package edu.uga.csci4050.group3.db;
 
 import java.util.Date;
 import java.util.List;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 
 import org.jooq.DSLContext;
 import org.jooq.Record;
@@ -12,6 +16,7 @@ import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
 
+import edu.uga.csci4050.group3.core.CarRentalServlet;
 import edu.uga.csci4050.group3.core.LocationEntity;
 import edu.uga.csci4050.group3.core.PaymentTransactionEntity;
 import edu.uga.csci4050.group3.core.RentalTransactionEntity;
@@ -415,9 +420,11 @@ public class DatabaseAbstraction {
 		.where(User.USER.UID.equal(UID)).execute();
 	}
 	
-	/** DATABASE MANAGEMENT **/
+	/** DATABASE MANAGEMENT 
+	 * @param context 
+	 * @param response **/
 	
-	public static void setupDatabase(){
+	public static void setupDatabase(HttpServletResponse response, ServletContext context){
 		Connection conn = getConnection();
 		
 		try{
@@ -603,6 +610,13 @@ public class DatabaseAbstraction {
 		
 		}
 		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		// Redirect home after setup
+		try {
+			response.sendRedirect(CarRentalServlet.getFullURL(context, "/user/home"));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

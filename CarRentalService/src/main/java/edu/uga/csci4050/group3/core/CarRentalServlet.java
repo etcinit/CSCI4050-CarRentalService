@@ -138,7 +138,7 @@ public class CarRentalServlet extends HttpServlet {
 		}else if(uriMatches(request, "/payments")){
 			new PaymentListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/database/setup")){
-			DatabaseAbstraction.setupDatabase();
+			DatabaseAbstraction.setupDatabase(response, context);
 		}else if(uriMatches(request, "/database/destroy")){
 			DatabaseAbstraction.destroyDatabase();
 		}else if(uriMatches(request, "/membership")){
