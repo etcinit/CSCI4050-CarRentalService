@@ -1,0 +1,11 @@
+<div>
+	<form name ="dates" action="{{base_url}}/rent" method="POST" >
+			<p>Enter the dates for the rental below</p>
+				<ul >
+					<li>Vehicle UID: <input type="text" name="uid" value="{{uid}}" disabled></li>
+					<li>Start Date: <input type="datetime-local" name="start_date" ></li>
+					<li>    End Date: <input type="datetime-local" name="end_date" ></li>
+					<input type="submit" value="Submit" >
+				</ul>
+	</form>
+</div>	
