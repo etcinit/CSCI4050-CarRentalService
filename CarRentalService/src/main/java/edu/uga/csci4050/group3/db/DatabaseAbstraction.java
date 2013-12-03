@@ -267,6 +267,22 @@ public class DatabaseAbstraction {
 		}
 	}
 	
+	public static List<RentalTransactionEntity> getConflictingRentalTransactions(String vehicleUID, Date start_date, Date end_date) throws RecordNotFoundException{
+		int istart_date = getTimestampFromDate(start_date);
+		int iend_date = getTimestampFromDate(end_date);
+		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
+		List<RentalTransactionEntity> result = create.select()
+				.from(RentalTransaction.RENTAL_TRANSACTION)
+				.where(RentalTransaction.RENTAL_TRANSACTION.START_DATE.lessThan(istart_date).and(RentalTransaction.RENTAL_TRANSACTION.END_DATE.greaterThan(istart_date)))
+				.or(RentalTransaction.RENTAL_TRANSACTION.START_DATE.lessThan(iend_date).and(RentalTransaction.RENTAL_TRANSACTION.END_DATE.greaterThan(iend_date)))
+				.fetch().into(RentalTransactionEntity.class);
+		if(result.size() > 0){
+			return result;
+		}else{
+			throw new RecordNotFoundException();
+		}
+	}
+	
 	public static void putRentalTransaction(RentalTransactionEntity transaction){
 		DSLContext create = DSL.using(getConnection(), SQLDialect.MYSQL);
 		RentalTransactionRecord tranRec = create.newRecord(RentalTransaction.RENTAL_TRANSACTION,transaction);
