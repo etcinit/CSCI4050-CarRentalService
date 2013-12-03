@@ -53,7 +53,7 @@ public class ReservationReturnControl {
 		// Attempt to find rental
 		RentalTransactionEntity rental = DatabaseAbstraction.getRentalTransaction(uid);
 		
-		// Calculate additional changers
+		// Calculate additional charges
 		
 		// If we are still in the rental period, there shouldn't be any
 		if(rental.getEnd_date() >= DatabaseAbstraction.getTimestampFromDate(new Date())){
