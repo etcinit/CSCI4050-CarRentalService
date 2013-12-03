@@ -38,7 +38,7 @@ public class UserCancelUI implements Boundary {
 		// Process cancellation
 		try {
 			if(control.processCancellation(request, response)){
-				CarRentalServlet.redirect(context, response, "/");
+				CarRentalServlet.redirect(context, response, "/user/logout");
 				return;
 			}
 		} catch (AuthenticationException e) {
