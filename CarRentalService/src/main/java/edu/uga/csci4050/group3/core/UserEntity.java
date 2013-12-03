@@ -14,6 +14,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import edu.uga.csci4050.group3.db.DatabaseAbstraction;
@@ -28,10 +29,11 @@ public class UserEntity {
 	@Column(name = "username")
 	@Size(min = 5, message = "Username should be at least 5 characters long")
 	@NotNull(message = "Username should not be empty")
+	@Pattern(regexp = "[a-zA-Z0-9-_.]{8,32}", message = "Usernames can only contian alphanumerical characters and dashes")
 	String username;
 	
 	@Column(name = "password")
-	@Size(min = 1)
+	@Size(min = 8, max = 250, message = "Passwords should be anywhere between 8 and 250 characters")
 	@NotNull(message = "Password should not be empty")
 	String password;
 	

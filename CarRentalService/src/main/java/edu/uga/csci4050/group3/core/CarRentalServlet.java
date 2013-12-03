@@ -12,6 +12,7 @@ import edu.uga.csci4050.group3.core.CancelAccountUI;
 import edu.uga.csci4050.group3.admin.LocationCreateUI;
 import edu.uga.csci4050.group3.admin.LocationDeleteUI;
 import edu.uga.csci4050.group3.admin.LocationUpdateUI;
+import edu.uga.csci4050.group3.admin.PaymentListUI;
 import edu.uga.csci4050.group3.admin.RentalCancelUI;
 import edu.uga.csci4050.group3.admin.RentalListUI;
 import edu.uga.csci4050.group3.admin.ServiceManagementUI;
@@ -134,6 +135,8 @@ public class CarRentalServlet extends HttpServlet {
 			new UserUpdateRoleUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/service")){
 			new ServiceManagementUI().handleRequest(request, response, context, type);
+		}else if(uriMatches(request, "/payments")){
+			new PaymentListUI().handleRequest(request, response, context, type);
 		}else if(uriMatches(request, "/database/setup")){
 			DatabaseAbstraction.setupDatabase();
 		}else if(uriMatches(request, "/database/destroy")){
