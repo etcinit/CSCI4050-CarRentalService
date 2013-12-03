@@ -17,8 +17,7 @@ public class VehicleRentUI implements Boundary {
 			RequestType type) {
 		
 		LayoutRoot lr = new LayoutRoot(context, request, response);
-		//SimpleTemplate page = new SimpleTemplate(context, "CreateRental.mustache");
-		SimpleTemplate cardTemplate = new SimpleTemplate(context,"VehicleCardCustomer.mustache"); //
+		SimpleTemplate cardTemplate = new SimpleTemplate(context,"VehicleCardCustomer.mustache");
 		SimpleTemplate vehicleRentLayout = new SimpleTemplate(context, "VehicleRent.mustache");
 		VehicleRentControl control = new VehicleRentControl();
 		
@@ -45,29 +44,46 @@ public class VehicleRentUI implements Boundary {
 			} catch (InvalidUrlException e) {
 				lr.setContent(new Alert(context,"Invalid URL format").render());
 				lr.render(response);
+				return;
 			} catch (RecordNotFoundException e) {
 				lr.setContent(new Alert(context,"Vehicle with UID not found").render());
 				lr.render(response);
+				return;
 			} 
 		}else{
-			// POST
 			try {
-				// Check 
-				control.checkReservationDates(request);
-				cardTemplate.setVariable("rental_dates", cardTemplate.render());
-				lr.setContent(cardTemplate.render());
-				
-				
-				
+				if(control.isVehicleAvailable(request)){
+					// Vehicle is available
+					SimpleTemplate availableLayout = new SimpleTemplate(context, "VehicleRentAvailable.mustache");
+					
+					// Populate variables
+					availableLayout.setVariable("uid", request.getParameter("rentalVehicleUID"));
+					availableLayout.setVariable("start_date", request.getParameter("rentalStartDate"));
+					availableLayout.setVariable("end_date", request.getParameter("rentalEndDate"));
+					VehicleTypeEntity vtype = control.getType(request);
+					availableLayout.setVariable("daily_rate", String.valueOf(vtype.getDaily_rate()));
+					availableLayout.setVariable("hourly_rate", String.valueOf(vtype.getHourly_rate()));
+					
+					// Render
+					lr.setContent(availableLayout.render());
+					lr.render(response);
+				}else{
+					// TODO: Vehicle is not available
+					// We need a database functions that looks for vehicle that are available
+					// It's probably the most complex piece of code in this thing
+				}
 			} catch (RecordNotFoundException e) {
-				lr.setContent(new Alert(context, "Vehicle with UID not found").render());
+				lr.setContent(new Alert(context,"Vehicle with UID not found").render());
 				lr.render(response);
+				return;
 			} catch (InvalidUrlException e) {
-				lr.setContent(new Alert(context, "Invalid URL format").render());
+				lr.setContent(new Alert(context,"Invalid URL format").render());
 				lr.render(response);
+				return;
 			} catch (InvalidInputException e) {
 				lr.setContent(e.getMessagesHtml(context));
 				lr.render(response);
+				return;
 			}
 		}
 		

@@ -26,23 +26,21 @@ public class VehicleRentControl {
 		return veh;
 	}
 	
-	
-	
-	public boolean checkReservationDates(HttpServletRequest request) throws RecordNotFoundException, InvalidUrlException, InvalidInputException{
+	public boolean isVehicleAvailable(HttpServletRequest request) throws RecordNotFoundException, InvalidUrlException, InvalidInputException{
 		
 		Date start_date = new Date();
 		Date end_date = new Date();
 		
 		// Check that we have a UID
-		if(!request.getParameterMap().containsKey("uid")){
+		if(!request.getParameterMap().containsKey("rentalVehicleUID")){
 			throw new InvalidUrlException();
 		}
 		
-		if(!request.getParameterMap().containsKey("start_date")){
+		if(!request.getParameterMap().containsKey("rentalStartDate")){
 			throw new InvalidUrlException();
 		}
 		
-		if(!request.getParameterMap().containsKey("end_date")){
+		if(!request.getParameterMap().containsKey("rentalEndDate")){
 			throw new InvalidUrlException();
 		}
 		
@@ -51,13 +49,13 @@ public class VehicleRentControl {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 		
 		try {
-			start_date = sdf.parse(request.getParameter("start_date"));
+			start_date = sdf.parse(request.getParameter("rentalStartDate"));
 		} catch (ParseException e) {
 			invalidEx.addMessage("Invalid start date format");
 		}
 		
 		try {
-			end_date = sdf.parse(request.getParameter("end_date"));
+			end_date = sdf.parse(request.getParameter("rentalEndDate"));
 		} catch (ParseException e) {
 			invalidEx.addMessage("Invalid end date format");
 		}
@@ -67,23 +65,25 @@ public class VehicleRentControl {
 		}
 		
 		// Attempt to get the vehicle
-		VehicleEntity veh = DatabaseAbstraction.getVehicle(request.getParameter("uid"));
+		VehicleEntity veh = DatabaseAbstraction.getVehicle(request.getParameter("rentalVehicleUID"));
 		
-		List<RentalTransactionEntity> tList = DatabaseAbstraction.getRentalTransactions();
-		
-		/*
-		if(tList.size() > 0){
-			for(RentalTransactionEntity rental : tList){
-				if(rental.getStart_date() == start){
-					return false;
-				}else if(rental.getEnd_date() == end){
-					return false;	
-				}
-			}
+		try{
+			List<RentalTransactionEntity> conflicts = DatabaseAbstraction.getConflictingRentalTransactions(veh.getUid(), start_date, end_date);
+			return false;
+		}
+		catch(RecordNotFoundException ex){
 			return true;
-		}*/
-		return true;
+		}
 	}
 	
-
+	public VehicleTypeEntity getType(HttpServletRequest request) throws InvalidUrlException, RecordNotFoundException{
+		if(!request.getParameterMap().containsKey("rentalVehicleUID")){
+			throw new InvalidUrlException();
+		}
+		
+		// Get vehicle first
+		VehicleEntity vehicle = DatabaseAbstraction.getVehicle(request.getParameter("rentalVehicleUID"));
+		
+		return DatabaseAbstraction.getVehicleType(vehicle.getType());
+	}
 }

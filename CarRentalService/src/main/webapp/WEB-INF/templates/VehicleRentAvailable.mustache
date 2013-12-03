@@ -26,18 +26,24 @@
 		<form role="form" action="{{base_url}}/rent/process" method="POST" >
 			<div class="form-group">
 				<label for="rentalVehicleUID">Vehicle UID:</label>
-				<input type="text" class="form-control" id="rentalVehicleUID" name="rentalVehicleUID" placeholder="UID missing" value={{uid}} disabled="disabled">
+				<input type="text" class="form-control" id="rentalVehicleUID" placeholder="UID missing" value={{uid}} disabled="disabled">
 			</div>
+			
+			<input type="hidden" name="rentalVehicleUID" value={{uid}}>
 			
 			<div class="form-group">
 				<label for="rentalStartDate">Start date and time:</label>
-				<input type="datetime-local" class="form-control" id="rentalStartDate" name="rentalStartDate" required="required" value={{start_time}} disabled="disabled">
+				<input type="datetime-local" class="form-control" id="rentalStartDate" required="required" value={{start_date}} disabled="disabled">
 			</div>
+			
+			<input type="hidden" name="rentalStartDate" value={{start_date}}>
 			
 			<div class="form-group">
 				<label for="rentalEndDate">End date and time:</label>
-				<input type="datetime-local" class="form-control" id="rentalEndDate" name="rentalEndDate" required="required" value={{end_time}} disabled="disabled">
+				<input type="datetime-local" class="form-control" id="rentalEndDate" required="required" value={{end_date}} disabled="disabled">
 			</div>
+			
+			<input type="hidden" name="rentalEndDate" value={{end_date}}>
 			
 			<div class="form-group">
 	        	<label for="rentalCardNumber">Credit or Debit Card Number</label>

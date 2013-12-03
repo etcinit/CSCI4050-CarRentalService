@@ -14,11 +14,13 @@
 	<div class="col-md-8">
 		<h4>Rental times:</h4>
 		<p>Enter the dates for the rental below:</p>
-		<form role="form" action="{{base_url}}/rent" method="POST" >
+		<form role="form" action="{{base_url}}/rent" method="post">
 			<div class="form-group">
 				<label for="rentalVehicleUID">Vehicle UID:</label>
-				<input type="text" class="form-control" id="rentalVehicleUID" name="rentalVehicleUID" placeholder="UID missing" value={{uid}} disabled="disabled">
+				<input type="text" class="form-control" id="rentalVehicleUID" placeholder="UID missing" value={{uid}} disabled="disabled">
 			</div>
+			
+			<input type="hidden" name="rentalVehicleUID" value={{uid}}>
 			
 			<div class="form-group">
 				<label for="rentalStartDate">Start date and time:</label>
