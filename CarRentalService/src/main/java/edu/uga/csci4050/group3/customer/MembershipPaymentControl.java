@@ -2,7 +2,6 @@ package edu.uga.csci4050.group3.customer;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -82,21 +81,7 @@ public class MembershipPaymentControl {
 				throw invalidEx;
 			}
 		}
-		
-<<<<<<< HEAD
-		Date currentExpiration;
-		if (user.getMembershipExpiration() == 0 || 
-				(user.getMembershipExpiration() < DatabaseAbstraction.getTimestampFromDate(new Date()))) { // Expired or non-existent
-			currentExpiration = new Date();
-		} else { // Not expired
-			currentExpiration = user.getMembershipExpirationDate();
-		}
-		Calendar c = Calendar.getInstance();
-		c.setTime(currentExpiration);
-		c.add(Calendar.MONTH, 6);
-		Date newDate = c.getTime();
-		user.setMembershipExpirationDate(newDate);
-=======
+
 		// Calculate new time
 		long newTime = 0;
 		if(user.getMembershipExpirationDate().getTime() < currentTime.getTime()){
@@ -126,7 +111,6 @@ public class MembershipPaymentControl {
 		
 		// Update user on the database
 		DatabaseAbstraction.updateUser(user);
->>>>>>> f6e1faa07c06703983ef728d294f282db006aab6
 	}
 	
 	public double getMembershipFee(ServletContext context) {
