@@ -1,0 +1,30 @@
+<form role="form" method="POST">
+
+  <div class="form-group">
+    <label for="rentalUID">Rental UID</label>
+    <input type="text" class="form-control" id="rentalUID" name="uid" placeholder="UID missing" value="{{uid}}" disabled="disabled">
+  </div>
+  
+  <p>Additional charges will be billed to the following account:</p>
+  
+  <div class="form-group">
+    <label for="rentalCard">Credit or Debit Card Number</label>
+    <input type="text" class="form-control" id="rentalCard" name="rentalCardNumber" placeholder="XXXX-XXXX-XXXX-XXXX">
+  </div>
+  
+  <div class="form-group">
+    <label for="rentalCSV">Card CSV Code</label>
+    <input type="text" class="form-control" id="rentalCSV" name="rentalCSV" placeholder="XXX" size="3">
+  </div>
+  
+  <p>Additional comments about your experience:</p>
+  
+  <div class="form-group">
+    <label for="rentalComments">Comments</label>
+    <textarea rows="3" class="form-control" id="rentalComments" name="rentalComments" placeholder="Enter comments about your experience"></textarea>
+  </div>
+  
+  <input type="hidden" name="rentalUID" value="{{uid}}">
+
+  <button type="submit" class="btn btn-success pull-right">Pay and return</button>
+</form>

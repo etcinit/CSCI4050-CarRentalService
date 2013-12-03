@@ -54,6 +54,10 @@
   	<url-pattern>/rentals</url-pattern>
   	<url-pattern>/rental/cancel</url-pattern>
   	
+  	<url-pattern>/reservations</url-pattern>
+  	<url-pattern>/reservation/cancel</url-pattern>
+  	<url-pattern>/reservation/return</url-pattern>
+  	
   	<url-pattern>/service</url-pattern>
   	
   	<url-pattern>/database/setup</url-pattern>
